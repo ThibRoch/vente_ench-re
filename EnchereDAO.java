@@ -17,9 +17,9 @@ import fr.eni.bo.Utilisateur;
 
 public class EnchereDAO {
 
-    private Connection connection;
-    
-    private static EnchereDAO instance = null;
+	private Connection connection;
+
+	private static EnchereDAO instance = null;
 
 	private EnchereDAO() {
 	}
@@ -47,38 +47,58 @@ public class EnchereDAO {
 		return con;
 	}
 
-    public EnchereDAO(Connection connection) {
-        this.connection = connection;
-    }
+	public EnchereDAO(Connection connection) {
+		this.connection = connection;
+	}
 
-    public void addEnchere(Enchere enchere) throws SQLException {
-        String sql = "INSERT INTO encheres (date_enchere, nom_article, montant_enchere, utilisateur) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setDate(1, (Date) enchere.getDateEnchère());
-            statement.setString(2, enchere.getNomArticle());
-            statement.setInt(3, enchere.getMontantEnchère());
-            statement.setString(4, enchere.getUtilisateur().getUsername());
-            statement.executeUpdate();
-        }
-    }
+	public void addEnchere(Enchere enchere) throws SQLException {
+		Connection con;
+		String sql = "INSERT INTO encheres (date_enchere, nom_article, montant_enchere, utilisateur) VALUES (?, ?, ?, ?)";
+		try (PreparedStatement statement = connection.prepareStatement(sql)) {
+			con = connectionBDD();
 
-    public List<Enchere> getEncheres() throws SQLException {
-        String sql = "SELECT * FROM encheres";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            ResultSet resultSet = statement.executeQuery();
-            List<Enchere> encheres = new ArrayList<>();
-            while (resultSet.next()) {
-                Enchere enchere = new Enchere();
-                enchere.setDateEnchère(resultSet.getDate("date_enchere"));
-                enchere.setNomArticle(resultSet.getString("nom_article"));
-                enchere.setMontantEnchère(resultSet.getInt("montant_enchere"));
-                Utilisateur utilisateur = new Utilisateur();
-                utilisateur.setUsername(resultSet.getString("utilisateur"));
-                enchere.setUtilisateur(utilisateur);
-                encheres.add(enchere);
-            }
-            return encheres;
-        }
-    }
+			statement.setDate(1, (Date) enchere.getDateEnchère());
+			statement.setString(2, enchere.getNomArticle());
+			statement.setInt(3, enchere.getMontantEnchère());
+			statement.setString(4, enchere.getUtilisateur().getUsername());
+			statement.executeUpdate();
+
+			con.close();
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public List<Enchere> getEncheres() throws SQLException {
+		Connection con;
+		String sql = "SELECT * FROM encheres";
+		try (PreparedStatement statement = connection.prepareStatement(sql)) {
+			con = connectionBDD();
+			ResultSet resultSet = statement.executeQuery();
+			List<Enchere> encheres = new ArrayList<>();
+			while (resultSet.next()) {
+				Enchere enchere = new Enchere();
+				enchere.setDateEnchère(resultSet.getDate("date_enchere"));
+				enchere.setNomArticle(resultSet.getString("nom_article"));
+				enchere.setMontantEnchère(resultSet.getInt("montant_enchere"));
+				Utilisateur utilisateur = new Utilisateur();
+				utilisateur.setUsername(resultSet.getString("utilisateur"));
+				enchere.setUtilisateur(utilisateur);
+				encheres.add(enchere);
+			}
+			return encheres;
+
+			con.close();
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
