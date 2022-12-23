@@ -29,15 +29,15 @@ public class RetraitDAO {
 	}
 
 	public List<Retrait> getRetraitByUtilisateur(Utilisateur u) {
-		Connection cnx = null;
+		Connection con = null;
 		PreparedStatement stmt;
 		ResultSet rs;
 		List<Retrait> lst = new ArrayList<Retrait>();
 		Retrait ad;
 
 		try {
-			cnx = connectionBDD();
-			stmt = cnx.prepareStatement("select * from retraits where id_pn=? order by ville");
+			con = connectionBDD();
+			stmt = con.prepareStatement("select * from retraits where id_pn=? order by ville");
 			stmt.setInt(1, u.getId());
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -51,7 +51,7 @@ public class RetraitDAO {
 			e.printStackTrace();
 		}
 		try {
-			cnx.close();
+			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
