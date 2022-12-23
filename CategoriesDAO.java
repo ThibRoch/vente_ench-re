@@ -9,6 +9,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class CategorieDAO {
 	
     private Connection connection;
@@ -42,14 +46,28 @@ public class CategorieDAO {
 	}
 
     public void create(Categorie categorie) throws SQLException {
+    	Connection con;
+		try {
+		con = connectionBDD();
+		
         String sql = "INSERT INTO categorie (no_categorie, libelle) VALUES (?, ?)";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, categorie.getNoCategorie());
         statement.setString(2, categorie.getLibelle());
         statement.executeUpdate();
+        
+        con.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
 
     public Categorie read(int noCategorie) throws SQLException {
+    	Connection con;
+		try {
+		con = connectionBDD();
         String sql = "SELECT * FROM categorie WHERE no_categorie = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, noCategorie);
@@ -60,24 +78,54 @@ public class CategorieDAO {
             return new Categorie(id, libelle);
         }
         return null;
+        
+        con.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
 
     public void update(Categorie categorie) throws SQLException {
+    	Connection con;
+		try {
+		con = connectionBDD();
         String sql = "UPDATE categorie SET libelle = ? WHERE no_categorie = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, categorie.getLibelle());
         statement.setInt(2, categorie.getNoCategorie());
         statement.executeUpdate();
+        
+        con.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
 
     public void delete(int noCategorie) throws SQLException {
+    	Connection con;
+		try {
+		con = connectionBDD();
         String sql = "DELETE FROM categorie WHERE no_categorie = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, noCategorie);
         statement.executeUpdate();
+        
+        con.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
 
     public List<Categorie> getAll() throws SQLException {
+    	Connection con;
+		try {
+		con = connectionBDD();
         String sql = "SELECT * FROM categorie";
         PreparedStatement statement = connection.prepareStatement(sql);
         ResultSet resultSet = statement.executeQuery();
@@ -88,5 +136,11 @@ public class CategorieDAO {
             categories.add(new Categorie(id, libelle));
         }
         return categories;
+        con.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
 }
