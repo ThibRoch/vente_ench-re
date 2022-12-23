@@ -28,7 +28,7 @@ public class RetraitDAO {
 		return instance;
 	}
 
-	public List<Retrait> getAdresseByUtilisateur(Utilisateur u) {
+	public List<Retrait> getRetraitByUtilisateur(Utilisateur u) {
 		Connection cnx = null;
 		PreparedStatement stmt;
 		ResultSet rs;
@@ -37,7 +37,7 @@ public class RetraitDAO {
 
 		try {
 			cnx = connectionBDD();
-			stmt = cnx.prepareStatement("select * from adresses where id_pn=? order by ville");
+			stmt = cnx.prepareStatement("select * from retraits where id_pn=? order by ville");
 			stmt.setInt(1, u.getId());
 			rs = stmt.executeQuery();
 			while (rs.next()) {
