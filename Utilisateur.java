@@ -2,7 +2,7 @@ package fr.eni.eni_encheres.bo;
 
 public class Utilisateur {
 
-	private int noUtilsateur;
+	private int noUtilisateur;
 	private String pseudo;
 	private String nom;
 	private String prenom;
@@ -17,12 +17,12 @@ public class Utilisateur {
 	//=> Ajouté au cas où ?
 	private boolean admin;
 
-	public int getNoUtilsateur() {
-		return noUtilsateur;
+	public int getNoUtilisateur() {
+		return noUtilisateur;
 	}
 
-	public void setNoUtilsateur(int noUtilsateur) {
-		this.noUtilsateur = noUtilsateur;
+	public void setNoUtilisateur(int noUtilisateur) {
+		this.noUtilisateur = noUtilisateur;
 	}
 
 	public String getPseudo() {
@@ -105,10 +105,12 @@ public class Utilisateur {
 		this.credit = credit;
 	}
 	
+	//Getter de admin
 	public boolean isAdmin() {
 		return admin;
 	}
 	
+	//Setter de admin
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
@@ -116,10 +118,10 @@ public class Utilisateur {
 	public Utilisateur() {
 	}
 
-	public Utilisateur(int noUtilsateur, String pseudo, String nom, String prenom, String email, String telephone,
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, boolean admin) {
 		super();
-		this.noUtilsateur = noUtilsateur;
+		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -132,18 +134,17 @@ public class Utilisateur {
 		this.admin = admin;
 	}
 
-	public Utilisateur(int noUtilsateur, String pseudo, String motDePasse) {
+	public Utilisateur(int noUtilisateur, String pseudo, String motDePasse) {
 		super();
-		this.noUtilsateur = noUtilsateur;
+		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.motDePasse = motDePasse;
 	}
 
 	@Override
 	public String toString() {
-		return "Utilisateur [noUtilsateur=" + noUtilsateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit + "admin=" + admin + "]";
 	}
-
 }
