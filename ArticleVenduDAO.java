@@ -57,7 +57,7 @@ public class ArticleVenduDAO extends ArticleVendu {
 			pstmt.setDate(4, (Date) vendeur.getDateFinEnchere());
 			pstmt.setInt(5, vendeur.getMiseAPrix());
 			pstmt.setInt(6, vendeur.getPrixVente());
-			pstmt.setInt(7, vendeur.getVendeur().getNoUtilsateur());
+			pstmt.setInt(7, vendeur.getVendeur().getNoUtilisateur());
 			pstmt.setInt(8, vendeur.getNoCategorie().getNoCategorie());
 			pstmt.executeUpdate();
 			
