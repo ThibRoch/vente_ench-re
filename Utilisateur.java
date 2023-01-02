@@ -1,4 +1,4 @@
-package fr.eni.BO;
+package fr.eni.eni_encheres.bo;
 
 public class Utilisateur {
 
@@ -9,10 +9,13 @@ public class Utilisateur {
 	private String email;
 	private String telephone;
 	private String rue;
-	private int codePostale;
+	private String codePostal;
 	private String ville;
 	private String motDePasse;
 	private int credit;
+	//Dans la BDD, il y a un Booleen pour savoir si l'Utilisateur est admin
+	//=> Ajouté au cas où ?
+	private boolean admin;
 
 	public int getNoUtilsateur() {
 		return noUtilsateur;
@@ -70,12 +73,12 @@ public class Utilisateur {
 		this.rue = rue;
 	}
 
-	public int getCodePostale() {
-		return codePostale;
+	public String getCodePostal() {
+		return codePostal;
 	}
 
-	public void setCodePostale(int codePostale) {
-		this.codePostale = codePostale;
+	public void setCodePostal(String codePostal) {
+		this.codePostal = codePostal;
 	}
 
 	public String getVille() {
@@ -101,12 +104,20 @@ public class Utilisateur {
 	public void setCredit(int credit) {
 		this.credit = credit;
 	}
+	
+	public boolean isAdmin() {
+		return admin;
+	}
+	
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 
 	public Utilisateur() {
 	}
 
 	public Utilisateur(int noUtilsateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, int codePostale, String ville, String motDePasse) {
+			String rue, String codePostal, String ville, String motDePasse, boolean admin) {
 		super();
 		this.noUtilsateur = noUtilsateur;
 		this.pseudo = pseudo;
@@ -115,9 +126,10 @@ public class Utilisateur {
 		this.email = email;
 		this.telephone = telephone;
 		this.rue = rue;
-		this.codePostale = codePostale;
+		this.codePostal = codePostal;
 		this.ville = ville;
 		this.motDePasse = motDePasse;
+		this.admin = admin;
 	}
 
 	public Utilisateur(int noUtilsateur, String pseudo, String motDePasse) {
@@ -130,8 +142,8 @@ public class Utilisateur {
 	@Override
 	public String toString() {
 		return "Utilisateur [noUtilsateur=" + noUtilsateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
-				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostale="
-				+ codePostale + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit + "]";
+				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
+				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit + "admin=" + admin + "]";
 	}
 
 }
