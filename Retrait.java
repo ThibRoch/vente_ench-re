@@ -1,9 +1,10 @@
-package fr.eni.BO;
+package fr.eni.eni_encheres.bo;
 
 public class Retrait {
 
 	private String rue;
-	private int codePostale;
+	//code_postal est un Varchar(15) dans la BDD (String du coup ?)
+	private String codePostal;
 	private String ville;
 	private ArticleVendu articleVendu;
 
@@ -15,12 +16,12 @@ public class Retrait {
 		this.rue = rue;
 	}
 
-	public int getCodePostale() {
-		return codePostale;
+	public String getCodePostal() {
+		return codePostal;
 	}
 
-	public void setCodePostale(int codePostale) {
-		this.codePostale = codePostale;
+	public void setCodePostal(String codePostal) {
+		this.codePostal = codePostal;
 	}
 
 	public String getVille() {
@@ -42,17 +43,17 @@ public class Retrait {
 	public Retrait() {
 	}
 
-	public Retrait(String rue, int codePostale, String ville, ArticleVendu articleVendu) {
+	public Retrait(String rue, String codePostal, String ville, ArticleVendu articleVendu) {
 		super();
 		this.rue = rue;
-		this.codePostale = codePostale;
+		this.codePostal = codePostal;
 		this.ville = ville;
 		this.articleVendu = articleVendu;
 	}
 
 	@Override
 	public String toString() {
-		return "Retrait [articleVendu = "+articleVendu+", rue=" + rue + ", codePostale=" + codePostale + ", ville=" + ville + "]";
+		return "Retrait [articleVendu = "+articleVendu+", rue=" + rue + ", codePostal=" + codePostal + ", ville=" + ville + "]";
 	}
 
 }
