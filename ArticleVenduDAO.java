@@ -45,10 +45,11 @@ public class ArticleVenduDAO extends ArticleVendu {
 	}
 
 	public void saveEnchere(ArticleVendu vendeur) {
-		Connection con;
+		Connection con;*
+		sql = "INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?,)";
+		
 		try {
 			con = connectionBDD();
-			sql = "INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?,)";
 			
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vendeur.getNomArticle());
@@ -71,9 +72,9 @@ public class ArticleVenduDAO extends ArticleVendu {
 
 	public void deleteByNoArticle(int noArticle) {
 		Connection con;
+		sql = "DELETE INTO ARTICLES_VENDUS WHERE no_article like ?";
 		try {
 			con = connectionBDD();
-			sql = "DELETE INTO ARTICLES_VENDUS WHERE no_article like ?";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, noArticle);
@@ -89,10 +90,10 @@ public class ArticleVenduDAO extends ArticleVendu {
 	public List<ArticleVendu> findAll(Utilisateur vendeur) {
 
 		List<ArticleVendu> articlesVendus = new ArrayList<ArticleVendu>();
+		sql = "SELECT * FROM ARTICLES_VENDUS";
 
 		try {
 			Connection con = connectionBDD();
-			sql = "SELECT * FROM ARTICLES_VENDUS";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -125,10 +126,10 @@ public class ArticleVenduDAO extends ArticleVendu {
 	public ArticleVendu findById(int noArticle) {
 
 		ArticleVendu articleVendu = null;
+		sql = "SELECT * FROM Utilisateur where no_article=?";
 
 		try {
 			Connection con = connectionBDD();
-			sql = "SELECT * FROM Utilisateur where no_article=?";
 			
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, noArticle);
