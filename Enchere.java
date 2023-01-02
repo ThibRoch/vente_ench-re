@@ -1,4 +1,4 @@
-package fr.eni.eni_encheres.BO;
+package fr.eni.eni_encheres.bo;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ public class Enchere {
 
 	private Date dateEnchere;
 	private String nomArticle;
-	private int montantEnchère;
+	private int montantEnchere;
 	private Utilisateur utilisateur;
 
 	public Date getDateEnchere() {
