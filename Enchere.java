@@ -1,24 +1,24 @@
-package fr.eni.BO;
+package fr.eni.eni_encheres.BO;
 
 import java.util.Date;
 
 public class Enchere {
 
-	private Date dateEnchère;
+	private Date dateEnchere;
 	private String nomArticle;
 	private int montantEnchère;
 	private Utilisateur utilisateur;
 
-	public Date getDateEnchère() {
-		return dateEnchère;
+	public Date getDateEnchere() {
+		return dateEnchere;
 	}
 
-	public void setDateEnchère(Date dateEnchère) {
-		this.dateEnchère = dateEnchère;
+	public void setDateEnchere(Date dateEnchere) {
+		this.dateEnchere = dateEnchere;
 	}
 
-	public int getMontantEnchère() {
-		return montantEnchère;
+	public int getMontantEnchere() {
+		return montantEnchere;
 	}
 
 	public String getNomArticle() {
@@ -29,8 +29,8 @@ public class Enchere {
 		this.nomArticle = nomArticle;
 	}
 
-	public void setMontantEnchère(int montantEnchère) {
-		this.montantEnchère = montantEnchère;
+	public void setMontantEnchere(int montantEnchere) {
+		this.montantEnchere = montantEnchere;
 	}
 
 	public Utilisateur getUtilisateur() {
@@ -44,15 +44,15 @@ public class Enchere {
 	public Enchere() {
 	}
 
-	public Enchere(Date dateEnchère, int montantEnchère, Utilisateur utilisateur) {
+	public Enchere(Date dateEnchere, int montantEnchere, Utilisateur utilisateur) {
 		super();
-		this.dateEnchère = dateEnchère;
-		this.montantEnchère = montantEnchère;
+		this.dateEnchere = dateEnchere;
+		this.montantEnchere = montantEnchere;
 		this.utilisateur = utilisateur;
 	}
 
 	@Override
 	public String toString() {
-		return "Enchere [dateEnchère=" + dateEnchère +", nomArticle = "+ nomArticle+", utilisateur = "+ utilisateur +", montantEnchère=" + montantEnchère + "]";
+		return "Enchere [dateEnchère=" + dateEnchere +", nomArticle = "+ nomArticle+", utilisateur = "+ utilisateur +", montantEnchère=" + montantEnchere + "]";
 	}
 }
