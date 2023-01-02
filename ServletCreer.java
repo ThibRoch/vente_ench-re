@@ -21,7 +21,7 @@ public class ServletCreer extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		getServletContext().getRequestDispatcher("/ajouter.html").forward(request, response);
+		getServletContext().getRequestDispatcher("/CreationProfil.jsp").forward(request, response);
 	}
 
 	/**
