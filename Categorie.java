@@ -1,4 +1,4 @@
-package fr.eni.BO;
+package fr.eni.eni_encheres.bo;
 
 public class Categorie {
 
