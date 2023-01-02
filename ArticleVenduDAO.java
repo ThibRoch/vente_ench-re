@@ -1,4 +1,4 @@
-package fr.eni.DAL;
+package fr.eni.eni_encheres.dal;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -37,11 +37,9 @@ public class ArticleVenduDAO extends ArticleVendu {
 			ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/pool_cnx");
 			con = ds.getConnection();
-
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-
 		return con;
 	}
 
@@ -49,7 +47,7 @@ public class ArticleVenduDAO extends ArticleVendu {
 		Connection con;
 		try {
 			con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?)");
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?,?)");
 			pstmt.setInt(1, vendeur.getNoArticle());
 			pstmt.setString(2, vendeur.getNomArticle());
 			pstmt.setString(3, vendeur.getDescription());
@@ -58,14 +56,12 @@ public class ArticleVenduDAO extends ArticleVendu {
 			pstmt.setInt(6, vendeur.getMiseAPrix());
 			pstmt.setInt(7, vendeur.getPrixVente());
 			pstmt.setInt(8, vendeur.getVendeur().getNoUtilsateur());
-			// pstmt.setInt(9, vendeur.getCategorieArticle());
+			pstmt.setInt(9, vendeur.getNoCategorie());
 
 			pstmt.executeUpdate();
 			con.close();
 
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
@@ -73,19 +69,15 @@ public class ArticleVenduDAO extends ArticleVendu {
 
 	public void deleteByNoArticle(int noArticle) {
 		Connection con;
-
 		try {
-			try {
-				con = connectionBDD();
+			con = connectionBDD();
 
-				PreparedStatement pstmt = con.prepareStatement("DELETE INTO ARTICLES_VENDUS WHERE no_article like ?");
-				pstmt.setInt(1, noArticle);
-				pstmt.executeUpdate();
-				pstmt.close();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-		} catch (SQLException e) {
+			PreparedStatement pstmt = con.prepareStatement("DELETE INTO ARTICLES_VENDUS WHERE no_article like ?");
+			pstmt.setInt(1, noArticle);
+			pstmt.executeUpdate();
+			pstmt.close();
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
@@ -117,11 +109,7 @@ public class ArticleVenduDAO extends ArticleVendu {
 
 			}
 			con.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return articlesVendus;
@@ -148,11 +136,7 @@ public class ArticleVenduDAO extends ArticleVendu {
 
 			}
 			con.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return articleVendu;
