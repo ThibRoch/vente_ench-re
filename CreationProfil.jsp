@@ -21,7 +21,7 @@
 		</nav>
 	</header>
 
-	  <form>
+	  <form method="post" action ="ServletCreer">
 		<div class="contain">
 			<h1>Créer un compte</h1>
 			<h2>Merci de remplir tous les champs pour finaliser la création
@@ -64,8 +64,7 @@
 					confidentialité</a>.
 			</p>
 
-			<button type="submit" class="enregistrer"
-				onclick=<%="request.getContextPath()/ServletConnection"%>>S'enregistrer</button>
+			<button type="submit" class="enregistrer">S'enregistrer</button>
 		</div>
 
 		<div class="identifier">
