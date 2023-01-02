@@ -14,8 +14,8 @@ public class ArticleVendu {
 	private Date dateFinEnchere;
 	private int miseAPrix;
 	private int prixVente;
-	private int vendeur = user.getNoUtilsateur();
-	private int noCategorie = categorie.getNoCategorie();
+	private Utilisateur vendeur;
+	private Categorie categorie;
 	private Retrait pointRelai;
 	private List<Enchere> nouvellesEncheres;
 
@@ -31,7 +31,7 @@ public class ArticleVendu {
 	 * @param categorieArticle
 	 */
 	public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEnchere,
-			Date dateFinEnchere, int prixInitial, int prixVente, int noUtilisateur, int categorieArticle) {
+			Date dateFinEnchere, int prixInitial, int prixVente, Utilisateur noUtilisateur, Categorie categorieArticle) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -39,7 +39,7 @@ public class ArticleVendu {
 		this.dateFinEnchere = dateFinEnchere;
 		this.miseAPrix = prixInitial;
 		this.prixVente = prixVente;
-		this.vendeur = noUtilisateur;
+		this.vendeur = vendeur;
 		this.noCategorie = categorieArticle;
 	}
 
@@ -150,32 +150,30 @@ public class ArticleVendu {
 	/**
 	 * @return the noVendeur
 	 */
-	public int getVendeur() {
+	public Utilisateur getVendeur() {
 		return vendeur;
 	}
 
 	/**
 	 * @param noVendeur the noUtilisateur to set
 	 */
-	public void setVendeur(int Vendeur) {
-		this.vendeur = Vendeur;
+	public void setVendeur(Utilisateur vendeur) {
+		this.vendeur = vendeur;
 	}
 
 	/**
 	 * @return the noCategorie
 	 */
-	public int getNoCategorie() {
-		return noCategorie;
+	public Categorie getNoCategorie() {
+		return categorie;
 	}
 
 	/**
 	 * @param noCategorie the noCategorie to set
 	 */
-	public void setNoCategorie(int noCategorie) {
-		this.noCategorie = noCategorie;
+	public void setNoCategorie(Categorie categorie) {
+		this.categorie = categorie;
 	}
-
-	
 	
 	/**
 	 * @return the pointRelai
@@ -211,7 +209,7 @@ public class ArticleVendu {
 	public String toString() {
 		return "ArticleVendu [no=" + noArticle + ", nom=" + nomArticle + ", description=" + description
 				+ ", dateDebutEnchere=" + dateDebutEnchere + ", dateFinEnchere" + dateFinEnchere + ", prixInitial"
-				+ miseAPrix + ", prixVente" + prixVente + "Vendeur=" + vendeur + "noCategorie" + noCategorie
+				+ miseAPrix + ", prixVente" + prixVente + "Vendeur=" + vendeur + "noCategorie" + categorie
 				+ "]";
 	}
 }
