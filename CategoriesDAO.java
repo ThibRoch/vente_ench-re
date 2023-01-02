@@ -51,7 +51,8 @@ public class CategorieDAO {
 		PreparedStatement pstmt = connection.prepareStatement(sql);
 		pstmt.setString(1, categorie.getLibelle());
 		pstmt.executeUpdate();
-
+		
+		pstmt.close();
 		con.close();
 	} catch (SQLException | ClassNotFoundException e) {
 		e.printStackTrace();
@@ -75,6 +76,8 @@ public class CategorieDAO {
 		    String libelle = resultSet.getString("libelle");
         	}
 		
+		rs.close();
+		pstmt.close();
        		con.close();
 		
 	} catch (SQLException | ClassNotFoundException e) {
@@ -89,11 +92,12 @@ public class CategorieDAO {
 	try {
 		con = connectionBDD();
 		String sql = "UPDATE categorie SET libelle = ? WHERE no_categorie = ?";
-		PreparedStatement statement = connection.prepareStatement(sql);
-		statement.setString(1, categorie.getLibelle());
-		statement.setInt(2, categorie.getNoCategorie());
-		statement.executeUpdate();
+		PreparedStatement pstmt = connection.prepareStatement(sql);
+		pstmt.setString(1, categorie.getLibelle());
+		pstmt.setInt(2, categorie.getNoCategorie());
+		pstmt.executeUpdate();
 
+		pstmt.close();
 		con.close();
 		
 	} catch (SQLException | ClassNotFoundException e) {
@@ -107,10 +111,11 @@ public class CategorieDAO {
 	try {
 		con = connectionBDD();
 		String sql = "DELETE FROM categorie WHERE no_categorie = ?";
-		PreparedStatement statement = connection.prepareStatement(sql);
-		statement.setInt(1, noCategorie);
-		statement.executeUpdate();
+		PreparedStatement pstmt = connection.prepareStatement(sql);
+		pstmt.setInt(1, noCategorie);
+		pstmt.executeUpdate();
 
+		pstmt.close();
 		con.close();
 		
 	} catch (SQLException | ClassNotFoundException e) {
@@ -125,15 +130,17 @@ public class CategorieDAO {
 	try {
 		con = connectionBDD();
 		String sql = "SELECT * FROM categorie";
-		PreparedStatement statement = connection.prepareStatement(sql);
-		ResultSet resultSet = statement.executeQuery();
+		PreparedStatement pstmt = connection.prepareStatement(sql);
+		ResultSet rs = statement.executeQuery();
 		
-		while (resultSet.next()) {
-		    int id = resultSet.getInt("no_categorie");
-		    String libelle = resultSet.getString("libelle");
+		while (rs.next()) {
+		    int id = rs.getInt("no_categorie");
+		    String libelle = rs.getString("libelle");
 		    categories.add(new Categorie(id, libelle));
 		}
 		
+		rs.close();
+		pstmt.close();
 		con.close();
 		
 	} catch (SQLException | ClassNotFoundException e) {
