@@ -19,9 +19,6 @@ public class ArticleVenduDAO extends ArticleVendu {
 	private static ArticleVenduDAO instance = null;
 	private static String sql = "";
 
-	private ArticleVenduDAO() {
-	}
-
 	public static ArticleVenduDAO getInstance() {
 		if (instance == null) {
 			instance = new ArticleVenduDAO();
@@ -43,7 +40,7 @@ public class ArticleVenduDAO extends ArticleVendu {
 		return con;
 	}
 
-	public void saveEnchere(ArticleVendu vendeur) {
+	public static void saveEnchere(ArticleVendu vendeur) {
 		Connection con;
 		sql = "INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?,)";
 		
@@ -69,7 +66,7 @@ public class ArticleVenduDAO extends ArticleVendu {
 		}
 	}
 
-	public void deleteByNoArticle(int noArticle) {
+	public static void deleteByNoArticle(int noArticle) {
 		Connection con;
 		sql = "DELETE INTO ARTICLES_VENDUS WHERE no_article like ?";
 		try {
@@ -86,7 +83,7 @@ public class ArticleVenduDAO extends ArticleVendu {
 		}
 	}
 
-	public List<ArticleVendu> findAll(Utilisateur vendeur) {
+	public static List<ArticleVendu> findAll(Utilisateur vendeur) {
 
 		List<ArticleVendu> articlesVendus = new ArrayList<ArticleVendu>();
 		sql = "SELECT * FROM ARTICLES_VENDUS";
@@ -122,7 +119,7 @@ public class ArticleVenduDAO extends ArticleVendu {
 		return articlesVendus;
 	}
 
-	public ArticleVendu findById(int noArticle) {
+	public static ArticleVendu findById(int noArticle) {
 
 		ArticleVendu articleVendu = null;
 		sql = "SELECT * FROM Utilisateur where no_article=?";
@@ -143,6 +140,7 @@ public class ArticleVenduDAO extends ArticleVendu {
 				articleVendu.setDateFinEnchere((Date) rs.getDate("date_fin_encheres "));
 				articleVendu.setMiseAPrix(rs.getInt(0));
 				articleVendu.setPrixVente(rs.getInt(0));
+				articleVendu.setVendeur(UtilisateurDAO.findByPseudo(rs.getString("vendeur")));
 			}
 			
 			rs.close();
