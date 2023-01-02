@@ -169,7 +169,7 @@ public class UtilisateurDAO {
 			Utilisateur user = null;
 
 			if (field != null && sens != null)
-				sql = "SELECT * FROM Utilisateur order by" + field + " " + sens
+				sql = "SELECT * FROM Utilisateur order by" + field + " " + sens;
 			else
 				sql = "SELECT * FROM Utilisateur";
 			
