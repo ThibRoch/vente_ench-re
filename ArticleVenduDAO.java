@@ -12,8 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import fr.eni.BO.ArticleVendu;
-import fr.eni.BO.Utilisateur;
+import fr.eni.eni_encheres.bo.*;
 
 public class ArticleVenduDAO extends ArticleVendu {
 
@@ -45,7 +44,7 @@ public class ArticleVenduDAO extends ArticleVendu {
 	}
 
 	public void saveEnchere(ArticleVendu vendeur) {
-		Connection con;*
+		Connection con;
 		sql = "INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?,)";
 		
 		try {
@@ -59,7 +58,7 @@ public class ArticleVenduDAO extends ArticleVendu {
 			pstmt.setInt(5, vendeur.getMiseAPrix());
 			pstmt.setInt(6, vendeur.getPrixVente());
 			pstmt.setInt(7, vendeur.getVendeur().getNoUtilsateur());
-			pstmt.setInt(8, vendeur.getNoCategorie());
+			pstmt.setInt(8, vendeur.getNoCategorie().getNoCategorie());
 			pstmt.executeUpdate();
 			
 			pstmt.close();
