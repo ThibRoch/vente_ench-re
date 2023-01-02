@@ -72,8 +72,8 @@ public class CategorieDAO {
 		ResultSet rs = pstmt.executeQuery();
 
 		if (rs.next()) {
-		    id = resultSet.getInt("no_categorie");
-		    libelle = resultSet.getString("libelle");
+		    id = rs.getInt("no_categorie");
+		    libelle = rs.getString("libelle");
         	}
 		
 		rs.close();
