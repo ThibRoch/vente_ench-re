@@ -4,9 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 public class ArticleVendu {
-	Utilisateur user;
-	Categorie categorie;
-
 	private int noArticle;
 	private String nomArticle;
 	private String description;
@@ -31,7 +28,7 @@ public class ArticleVendu {
 	 * @param categorieArticle
 	 */
 	public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEnchere,
-			Date dateFinEnchere, int prixInitial, int prixVente, Utilisateur noUtilisateur, Categorie categorieArticle) {
+			Date dateFinEnchere, int prixInitial, int prixVente, Utilisateur vendeur, Categorie categorie) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -40,7 +37,7 @@ public class ArticleVendu {
 		this.miseAPrix = prixInitial;
 		this.prixVente = prixVente;
 		this.vendeur = vendeur;
-		this.noCategorie = categorieArticle;
+		this.categorie = categorie;
 	}
 
 	/**
