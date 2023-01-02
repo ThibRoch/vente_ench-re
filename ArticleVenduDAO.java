@@ -18,6 +18,7 @@ import fr.eni.BO.Utilisateur;
 public class ArticleVenduDAO extends ArticleVendu {
 
 	private static ArticleVenduDAO instance = null;
+	private static String sql = "";
 
 	private ArticleVenduDAO() {
 	}
@@ -47,40 +48,42 @@ public class ArticleVenduDAO extends ArticleVendu {
 		Connection con;
 		try {
 			con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?,?)");
-			pstmt.setInt(1, vendeur.getNoArticle());
-			pstmt.setString(2, vendeur.getNomArticle());
-			pstmt.setString(3, vendeur.getDescription());
-			pstmt.setDate(4, (Date) vendeur.getDateDebutEnchere());
-			pstmt.setDate(5, (Date) vendeur.getDateFinEnchere());
-			pstmt.setInt(6, vendeur.getMiseAPrix());
-			pstmt.setInt(7, vendeur.getPrixVente());
-			pstmt.setInt(8, vendeur.getVendeur().getNoUtilsateur());
-			pstmt.setInt(9, vendeur.getNoCategorie());
-
+			sql = "INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?,)";
+			
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vendeur.getNomArticle());
+			pstmt.setString(2, vendeur.getDescription());
+			pstmt.setDate(3, (Date) vendeur.getDateDebutEnchere());
+			pstmt.setDate(4, (Date) vendeur.getDateFinEnchere());
+			pstmt.setInt(5, vendeur.getMiseAPrix());
+			pstmt.setInt(6, vendeur.getPrixVente());
+			pstmt.setInt(7, vendeur.getVendeur().getNoUtilsateur());
+			pstmt.setInt(8, vendeur.getNoCategorie());
 			pstmt.executeUpdate();
+			
+			pstmt.close();
 			con.close();
 
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void deleteByNoArticle(int noArticle) {
 		Connection con;
 		try {
 			con = connectionBDD();
+			sql = "DELETE INTO ARTICLES_VENDUS WHERE no_article like ?";
 
-			PreparedStatement pstmt = con.prepareStatement("DELETE INTO ARTICLES_VENDUS WHERE no_article like ?");
+			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, noArticle);
 			pstmt.executeUpdate();
+			
 			pstmt.close();
 			con.close();
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public List<ArticleVendu> findAll(Utilisateur vendeur) {
@@ -89,26 +92,30 @@ public class ArticleVenduDAO extends ArticleVendu {
 
 		try {
 			Connection con = connectionBDD();
+			sql = "SELECT * FROM ARTICLES_VENDUS";
 
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM ARTICLES_VENDUS");
+			PreparedStatement pstmt = con.prepareStatement(sql);
 
-			ResultSet res = pstmt.executeQuery();
+			ResultSet rs = pstmt.executeQuery();
 
-			while (res.next()) {
+			while (rs.next()) {
 				ArticleVendu articleVendu = new ArticleVendu();
-				articleVendu.setNoArticle(res.getInt("noArticle"));
-				articleVendu.setNomArticle(res.getString("nomArticle"));
-				articleVendu.setDescription(res.getString("description"));
-				articleVendu.setDateDebutEnchere((Date) res.getDate("date_debut_encheres "));
-				articleVendu.setDateFinEnchere((Date) res.getDate("date_fin_encheres "));
-				articleVendu.setMiseAPrix(res.getInt("miseAPrix"));
-				articleVendu.setPrixVente(res.getInt("prixVente"));
-				UtilisateurDAOJdbcImpl.findByPseudo(res.getString("vendeur"));
-				// articleVendu.setVendeur(res.getInt("vendeur"));
+				articleVendu.setNoArticle(rs.getInt("noArticle"));
+				articleVendu.setNomArticle(rs.getString("nomArticle"));
+				articleVendu.setDescription(rs.getString("description"));
+				articleVendu.setDateDebutEnchere((Date) rs.getDate("date_debut_encheres "));
+				articleVendu.setDateFinEnchere((Date) rs.getDate("date_fin_encheres "));
+				articleVendu.setMiseAPrix(rs.getInt("miseAPrix"));
+				articleVendu.setPrixVente(rs.getInt("prixVente"));
+				UtilisateurDAO.findByPseudo(rs.getString("vendeur"));
+				// articleVendu.setVendeur(rs.getInt("vendeur"));
 				articlesVendus.add(articleVendu);
 
 			}
+			rs.close();
+			pstmt.close();
 			con.close();
+			
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -121,25 +128,30 @@ public class ArticleVenduDAO extends ArticleVendu {
 
 		try {
 			Connection con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Utilisateur where no_article=?");
+			sql = "SELECT * FROM Utilisateur where no_article=?";
+			
+			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, noArticle);
-			ResultSet res = pstmt.executeQuery();
-			if (res.next()) {
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
 				articleVendu = new ArticleVendu();
-				articleVendu.setNoArticle(res.getInt(0));
-				articleVendu.setNomArticle(res.getString("nomArticle"));
-				articleVendu.setDescription(res.getString("description"));
-				articleVendu.setDateDebutEnchere((Date) res.getDate("date_debut_encheres "));
-				articleVendu.setDateFinEnchere((Date) res.getDate("date_fin_encheres "));
-				articleVendu.setMiseAPrix(res.getInt(0));
-				articleVendu.setPrixVente(res.getInt(0));
-
+				articleVendu.setNoArticle(rs.getInt(0));
+				articleVendu.setNomArticle(rs.getString("nomArticle"));
+				articleVendu.setDescription(rs.getString("description"));
+				articleVendu.setDateDebutEnchere((Date) rs.getDate("date_debut_encheres "));
+				articleVendu.setDateFinEnchere((Date) rs.getDate("date_fin_encheres "));
+				articleVendu.setMiseAPrix(rs.getInt(0));
+				articleVendu.setPrixVente(rs.getInt(0));
 			}
+			
+			rs.close();
+			pstmt.close();
 			con.close();
+			
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return articleVendu;
 	}
-
 }
