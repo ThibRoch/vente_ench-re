@@ -15,6 +15,7 @@ import fr.eni.eni_encheres.bo.*;
 
 public class UtilisateurDAO {
 
+	private static Connection con = null;
 	private static UtilisateurDAO instance = null;
 	private static String sql = "";
 
@@ -26,7 +27,6 @@ public class UtilisateurDAO {
 	}
 
 	private static Connection connectionBDD() throws ClassNotFoundException, SQLException {
-		Connection con = null;
 		DataSource ds;
 		InitialContext ctx;
 		try {
@@ -40,7 +40,6 @@ public class UtilisateurDAO {
 	}
 	
 	public static Utilisateur login(String email, String motDePasse) {
-		Connection con = null;
 		Utilisateur user = null;
 
 		try {
@@ -55,7 +54,7 @@ public class UtilisateurDAO {
 
 			if (rs.next()) {
 				user = new Utilisateur();
-				user.setNoUtilsateur(rs.getInt("no_utilisateur"));
+				user.setNoUtilisateur(rs.getInt("no_utilisateur"));
 				user.setPseudo(rs.getString("pseudo"));
 				user.setNom(rs.getString("nom"));
 				user.setPrenom(rs.getString("prenom"));
@@ -68,7 +67,6 @@ public class UtilisateurDAO {
 				user.setCredit(rs.getInt("credit"));
 				user.setAdmin(rs.getBoolean("admin"));
 			}
-			
 			rs.close();
 			pstmt.close();
 			con.close();
@@ -80,7 +78,6 @@ public class UtilisateurDAO {
 	}
 	
 	public static void create(Utilisateur user) {
-		Connection con = null;
 		
 		try {
 			con = connectionBDD();
@@ -109,7 +106,6 @@ public class UtilisateurDAO {
 	}
 	
 	public static void deleteByPseudo(String pseudo) {
-		Connection con = null;
 
 		try{
 			con = connectionBDD();
@@ -129,7 +125,6 @@ public class UtilisateurDAO {
 
 	
 	public static void update(Utilisateur user){
-		Connection con = null;
 		
 		try {
 			con = connectionBDD();
@@ -145,7 +140,7 @@ public class UtilisateurDAO {
 			pstmt.setString(7, user.getCodePostal());
 			pstmt.setString(8, user.getVille());
 			pstmt.setString(9, user.getMotDePasse());
-			pstmt.setInt(10, user.getNoUtilsateur());
+			pstmt.setInt(10, user.getNoUtilisateur());
 			pstmt.executeUpdate();
 			
 			pstmt.close();
@@ -160,13 +155,11 @@ public class UtilisateurDAO {
 	public List<Utilisateur> findAll(String field, String sens) {
 
 		List<Utilisateur> users = new ArrayList<Utilisateur>();
-		Connection con = null;
-		String sql="";
+		PreparedStatement pstmt;
+		Utilisateur user = null;
 
 		try {
 			con = connectionBDD();
-			PreparedStatement pstmt;
-			Utilisateur user = null;
 
 			if (field != null && sens != null)
 				sql = "SELECT * FROM Utilisateur order by" + field + " " + sens;
@@ -178,7 +171,7 @@ public class UtilisateurDAO {
 
 			while (rs.next()) {
 				user = new Utilisateur();
-				user.setNoUtilsateur(rs.getInt("no_utilisateur"));
+				user.setNoUtilisateur(rs.getInt("no_utilisateur"));
 				user.setPseudo(rs.getString("pseudo"));
 				user.setNom(rs.getString("nom"));
 				user.setPrenom(rs.getString("prenom"));
@@ -206,7 +199,6 @@ public class UtilisateurDAO {
 
 	
 	public static Utilisateur findByPseudo(String pseudo) {
-		Connection con = null;
 		Utilisateur user = null;
 
 		try {
@@ -219,7 +211,7 @@ public class UtilisateurDAO {
 
 			if (rs.next()) {
 				user = new Utilisateur();
-				user.setNoUtilsateur(rs.getInt("no_utilisateur"));
+				user.setNoUtilisateur(rs.getInt("no_utilisateur"));
 				user.setPseudo(rs.getString("pseudo"));
 				user.setNom(rs.getString("nom"));
 				user.setPrenom(rs.getString("prenom"));
@@ -238,20 +230,17 @@ public class UtilisateurDAO {
 
 		} catch (SQLException |ClassNotFoundException e) {
 			e.printStackTrace();
-
 		}
 		return user;
 	}
 
 	
 	public static Utilisateur findByEmail(String email) {
-		Connection con = null;
 		Utilisateur user = null;
 
 		try {
 			con = connectionBDD();
 			sql = "SELECT * FROM Utilisateurs WHERE email=?";
-			
 			
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
@@ -259,7 +248,7 @@ public class UtilisateurDAO {
 
 			if (rs.next()) {
 				user = new Utilisateur();
-				user.setNoUtilsateur(rs.getInt("no_utilisateur"));
+				user.setNoUtilisateur(rs.getInt("no_utilisateur"));
 				user.setPseudo(rs.getString("pseudo"));
 				user.setNom(rs.getString("nom"));
 				user.setPrenom(rs.getString("prenom"));
@@ -278,7 +267,6 @@ public class UtilisateurDAO {
 
 		} catch (SQLException |ClassNotFoundException e) {
 			e.printStackTrace();
-
 		}
 		return user;
 	}
