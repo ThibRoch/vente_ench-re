@@ -48,7 +48,7 @@ public class CategorieDAO {
 		con = connectionBDD();
 
 		String sql = "INSERT INTO categorie (libelle) VALUES (?)";
-		PreparedStatement pstmt = connection.prepareStatement(sql);
+		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, categorie.getLibelle());
 		pstmt.executeUpdate();
 		
@@ -67,13 +67,13 @@ public class CategorieDAO {
 	try {
 		con = connectionBDD();
 		String sql = "SELECT * FROM categorie WHERE no_categorie = ?";
-		PreparedStatement pstmt = connection.prepareStatement(sql);
+		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1, noCategorie);
 		ResultSet rs = pstmt.executeQuery();
 
 		if (rs.next()) {
-		    int id = resultSet.getInt("no_categorie");
-		    String libelle = resultSet.getString("libelle");
+		    id = resultSet.getInt("no_categorie");
+		    libelle = resultSet.getString("libelle");
         	}
 		
 		rs.close();
@@ -92,7 +92,7 @@ public class CategorieDAO {
 	try {
 		con = connectionBDD();
 		String sql = "UPDATE categorie SET libelle = ? WHERE no_categorie = ?";
-		PreparedStatement pstmt = connection.prepareStatement(sql);
+		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, categorie.getLibelle());
 		pstmt.setInt(2, categorie.getNoCategorie());
 		pstmt.executeUpdate();
@@ -111,7 +111,7 @@ public class CategorieDAO {
 	try {
 		con = connectionBDD();
 		String sql = "DELETE FROM categorie WHERE no_categorie = ?";
-		PreparedStatement pstmt = connection.prepareStatement(sql);
+		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1, noCategorie);
 		pstmt.executeUpdate();
 
@@ -130,8 +130,8 @@ public class CategorieDAO {
 	try {
 		con = connectionBDD();
 		String sql = "SELECT * FROM categorie";
-		PreparedStatement pstmt = connection.prepareStatement(sql);
-		ResultSet rs = statement.executeQuery();
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
 		
 		while (rs.next()) {
 		    int id = rs.getInt("no_categorie");
