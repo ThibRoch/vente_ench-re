@@ -1,4 +1,4 @@
-package fr.eni.encheres_commun.dal;
+package fr.eni.eni_encheres.dal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,16 +11,17 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import fr.eni.encheres_commun.bo.*;
+import fr.eni.eni_encheres.bo.*;
 
 public class UtilisateurDAO {
 
 	private static UtilisateurDAO instance = null;
+	private static String sql = "";
 
 	public static UtilisateurDAO getInstance() {
 		if (instance == null)
 			instance = new UtilisateurDAO();
-
+		
 		return (UtilisateurDAO) instance;
 	}
 
@@ -32,11 +33,9 @@ public class UtilisateurDAO {
 			ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/pool_cnx");
 			con = ds.getConnection();
-
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-
 		return con;
 	}
 	
@@ -45,9 +44,10 @@ public class UtilisateurDAO {
 		Utilisateur user = null;
 
 		try {
-
 			con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Utilisateurs WHERE email=? and password=?");
+			sql = "SELECT * FROM Utilisateurs WHERE email=? and password=?";
+	
+			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			pstmt.setString(2, motDePasse);
 
@@ -68,24 +68,25 @@ public class UtilisateurDAO {
 				user.setCredit(rs.getInt("credit"));
 				user.setAdmin(rs.getBoolean("admin"));
 			}
+			
+			rs.close();
+			pstmt.close();
 			con.close();
 
 		} catch (SQLException |ClassNotFoundException e) {
 			e.printStackTrace();
-
 		}
 		return user;
 	}
-
 	
 	public static void create(Utilisateur user) {
 		Connection con = null;
 		
 		try {
-			
 			con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement(
-					"INSERT INTO Utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+			sql = "INSERT INTO Utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+
+			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, user.getPseudo());
 			pstmt.setString(2, user.getNom());
 			pstmt.setString(3, user.getPrenom());
@@ -97,43 +98,44 @@ public class UtilisateurDAO {
 			pstmt.setString(9, user.getMotDePasse());
 			pstmt.setInt(10, user.getCredit());
 			pstmt.setBoolean(11, user.isAdmin());
-
 			pstmt.executeUpdate();
-
+			
+			pstmt.close();
 			con.close();
 
 		} catch (SQLException |ClassNotFoundException e) {
 			e.printStackTrace();
-
 		}
 	}
-
 	
 	public static void deleteByPseudo(String pseudo) {
 		Connection con = null;
 
 		try{
 			con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("DELETE FROM Utilisateurs WHERE pseudo=?");
+			sql = "DELETE FROM Utilisateurs WHERE pseudo=?";
+			
+			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, pseudo);
 			pstmt.executeUpdate();
-
+			
+			pstmt.close();
 			con.close();
 
 		} catch (SQLException |ClassNotFoundException e) {
 			e.printStackTrace();
-
 		}
 	}
 
 	
-	public static void update(Utilisateur user) throws ClassNotFoundException {
+	public static void update(Utilisateur user){
 		Connection con = null;
 		
 		try {
 			con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement(
-					"UPDATE Utilisateur set pseudo=?,nom=?,prenom=?,email=?,telephone=?,rue=?,code_postal=?,ville=?,mot_de_passe=?");
+			sql = "UPDATE Utilisateur set pseudo=?,nom=?,prenom=?,email=?,telephone=?,rue=?,code_postal=?,ville=?,mot_de_passe=? WHERE id=?";
+			
+			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, user.getPseudo());
 			pstmt.setString(2, user.getNom());
 			pstmt.setString(3, user.getPrenom());
@@ -143,13 +145,14 @@ public class UtilisateurDAO {
 			pstmt.setString(7, user.getCodePostal());
 			pstmt.setString(8, user.getVille());
 			pstmt.setString(9, user.getMotDePasse());
+			pstmt.setInt(10, user.getNoUtilsateur());
 			pstmt.executeUpdate();
-
+			
+			pstmt.close();
 			con.close();
 
 		} catch (SQLException |ClassNotFoundException e) {
 			e.printStackTrace();
-
 		}
 	}
 
@@ -158,6 +161,7 @@ public class UtilisateurDAO {
 
 		List<Utilisateur> users = new ArrayList<Utilisateur>();
 		Connection con = null;
+		String sql="";
 
 		try {
 			con = connectionBDD();
@@ -165,10 +169,11 @@ public class UtilisateurDAO {
 			Utilisateur user = null;
 
 			if (field != null && sens != null)
-				pstmt = con.prepareStatement("SELECT * FROM Utilisateur order by" + field + " " + sens);
+				sql = "SELECT * FROM Utilisateur order by" + field + " " + sens
 			else
-				pstmt = con.prepareStatement("SELECT * FROM Utilisateur");
-
+				sql = "SELECT * FROM Utilisateur";
+			
+			pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -188,11 +193,13 @@ public class UtilisateurDAO {
 
 				users.add(user);
 			}
+			
+			rs.close();
+			pstmt.close();
 			con.close();
 
 		} catch (SQLException |ClassNotFoundException e) {
 			e.printStackTrace();
-
 		}
 		return users;
 	}
@@ -204,7 +211,9 @@ public class UtilisateurDAO {
 
 		try {
 			con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Utilisateurs WHERE pseudo=?");
+			sql = "SELECT * FROM Utilisateurs WHERE pseudo=?";
+			
+			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, pseudo);
 			ResultSet rs = pstmt.executeQuery();
 
@@ -223,6 +232,8 @@ public class UtilisateurDAO {
 				user.setCredit(rs.getInt("credit"));
 				user.setAdmin(rs.getBoolean("admin"));
 			}
+			rs.close();
+			pstmt.close();
 			con.close();
 
 		} catch (SQLException |ClassNotFoundException e) {
@@ -239,7 +250,10 @@ public class UtilisateurDAO {
 
 		try {
 			con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Utilisateurs WHERE email=?");
+			sql = "SELECT * FROM Utilisateurs WHERE email=?";
+			
+			
+			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			ResultSet rs = pstmt.executeQuery();
 
@@ -258,6 +272,8 @@ public class UtilisateurDAO {
 				user.setCredit(rs.getInt("credit"));
 				user.setAdmin(rs.getBoolean("admin"));
 			}
+			rs.close();
+			pstmt.close();
 			con.close();
 
 		} catch (SQLException |ClassNotFoundException e) {
