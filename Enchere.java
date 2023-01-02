@@ -7,7 +7,7 @@ public class Enchere {
 	private Date dateEnchere;
 	private String nomArticle;
 	private int montantEnchere;
-	private Utilisateur utilisateur;
+	private Utilisateur user;
 
 	public Date getDateEnchere() {
 		return dateEnchere;
@@ -33,26 +33,26 @@ public class Enchere {
 		this.montantEnchere = montantEnchere;
 	}
 
-	public Utilisateur getUtilisateur() {
-		return utilisateur;
+	public Utilisateur getUser() {
+		return user;
 	}
 
-	public void setUtilisateur(Utilisateur utilisateur) {
-		this.utilisateur = utilisateur;
+	public void setUser(Utilisateur user) {
+		this.user = user;
 	}
 
 	public Enchere() {
 	}
 
-	public Enchere(Date dateEnchere, int montantEnchere, Utilisateur utilisateur) {
+	public Enchere(Date dateEnchere, int montantEnchere, Utilisateur user) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
-		this.utilisateur = utilisateur;
+		this.user = user;
 	}
 
 	@Override
 	public String toString() {
-		return "Enchere [dateEnchère=" + dateEnchere +", nomArticle = "+ nomArticle+", utilisateur = "+ utilisateur +", montantEnchère=" + montantEnchere + "]";
+		return "Enchere [dateEnchère=" + dateEnchere +", nomArticle = "+ nomArticle+", utilisateur = "+ user +", montantEnchère=" + montantEnchere + "]";
 	}
 }
