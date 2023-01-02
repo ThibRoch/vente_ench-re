@@ -1,4 +1,4 @@
-package fr.eni.ventes_encheres.dal;
+package fr.eni.eni_encheres.dal;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -12,14 +12,13 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import fr.eni.bo.Enchere;
-import fr.eni.bo.Utilisateur;
+import fr.eni.eni_encheres.bo.*;
 
 public class EnchereDAO {
 
-	private Connection connection;
-
+	private static Connection con;
 	private static EnchereDAO instance = null;
+	private static String sql="";
 
 	private EnchereDAO() {
 	}
@@ -32,9 +31,9 @@ public class EnchereDAO {
 	}
 
 	private static Connection connectionBDD() throws ClassNotFoundException, SQLException {
-		Connection con = null;
 		DataSource ds;
 		InitialContext ctx;
+		
 		try {
 			ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/pool_cnx");
@@ -43,62 +42,58 @@ public class EnchereDAO {
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-
 		return con;
 	}
 
-	public EnchereDAO(Connection connection) {
-		this.connection = connection;
+	public EnchereDAO(Connection con) {
+		EnchereDAO.con = con;
 	}
 
-	public void addEnchere(Enchere enchere) throws SQLException {
-		Connection con;
-		String sql = "INSERT INTO encheres (date_enchere, nom_article, montant_enchere, utilisateur) VALUES (?, ?, ?, ?)";
-		try (PreparedStatement statement = connection.prepareStatement(sql)) {
+	public void addEnchere(Enchere enchere){
+		sql = "INSERT INTO encheres (date_enchere, no_article, montant_enchere, no_utilisateur) VALUES (?, ?, ?, ?)";
+		
+		try  {
 			con = connectionBDD();
+			PreparedStatement pstmt = con.prepareStatement(sql);
 
-			statement.setDate(1, (Date) enchere.getDateEnchère());
-			statement.setString(2, enchere.getNomArticle());
-			statement.setInt(3, enchere.getMontantEnchère());
-			statement.setString(4, enchere.getUtilisateur().getUsername());
-			statement.executeUpdate();
+			pstmt.setDate(1, (Date) enchere.getDateEnchere());
+			pstmt.setString(2, enchere.getNomArticle());
+			pstmt.setInt(3, enchere.getMontantEnchere());
+			pstmt.setInt(4, enchere.getUser().getNoUtilisateur());
+			pstmt.executeUpdate();
 
+			pstmt.close();
 			con.close();
 
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-
 	}
 
-	public List<Enchere> getEncheres() throws SQLException {
-		Connection con;
-		String sql = "SELECT * FROM encheres";
-		try (PreparedStatement statement = connection.prepareStatement(sql)) {
+	public List<Enchere> getEncheres(){
+		sql = "SELECT * FROM encheres";
+		List<Enchere> encheres = new ArrayList<>();
+		
+		try {
 			con = connectionBDD();
-			ResultSet resultSet = statement.executeQuery();
-			List<Enchere> encheres = new ArrayList<>();
-			while (resultSet.next()) {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
 				Enchere enchere = new Enchere();
-				enchere.setDateEnchère(resultSet.getDate("date_enchere"));
-				enchere.setNomArticle(resultSet.getString("nom_article"));
-				enchere.setMontantEnchère(resultSet.getInt("montant_enchere"));
-				Utilisateur utilisateur = new Utilisateur();
-				utilisateur.setUsername(resultSet.getString("utilisateur"));
-				enchere.setUtilisateur(utilisateur);
+				enchere.setDateEnchere(rs.getDate("date_enchere"));
+				enchere.setNomArticle(rs.getString("no_article"));
+				enchere.setMontantEnchere(rs.getInt("montant_enchere"));
+				UtilisateurDAO.findByPseudo(rs.getString("user"));
 				encheres.add(enchere);
 			}
-			return encheres;
-
+			rs.close();
+			pstmt.close();
 			con.close();
-
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+			
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		return encheres;
 	}
-
 }
