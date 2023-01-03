@@ -14,20 +14,23 @@ import javax.sql.DataSource;
 
 import fr.eni.eni_encheres.bo.*;
 
-public class ArticleVenduDAO extends ArticleVendu {
-
+public class ArticleVenduDAO extends ArticleVendu{
+	
+	private static Connection con = null;
+	private static PreparedStatement pstmt = null;
+	private static ResultSet rs = null;
+	
 	private static ArticleVenduDAO instance = null;
 	private static String sql = "";
 
 	public static ArticleVenduDAO getInstance() {
-		if (instance == null) {
+		if (instance == null) 
 			instance = new ArticleVenduDAO();
-		}
-		return instance;
+		
+		return (ArticleVenduDAO) instance;
 	}
 
 	private static Connection connectionBDD() throws ClassNotFoundException, SQLException {
-		Connection con = null;
 		DataSource ds;
 		InitialContext ctx;
 		try {
@@ -41,13 +44,12 @@ public class ArticleVenduDAO extends ArticleVendu {
 	}
 
 	public static void saveEnchere(ArticleVendu vendeur) {
-		Connection con;
 		sql = "INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?,)";
 		
 		try {
 			con = connectionBDD();
+			pstmt = con.prepareStatement(sql);
 			
-			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vendeur.getNomArticle());
 			pstmt.setString(2, vendeur.getDescription());
 			pstmt.setDate(3, (Date) vendeur.getDateDebutEnchere());
@@ -67,12 +69,11 @@ public class ArticleVenduDAO extends ArticleVendu {
 	}
 
 	public static void deleteByNoArticle(int noArticle) {
-		Connection con;
 		sql = "DELETE INTO ARTICLES_VENDUS WHERE no_article like ?";
 		try {
 			con = connectionBDD();
-
-			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
+			
 			pstmt.setInt(1, noArticle);
 			pstmt.executeUpdate();
 			
@@ -89,11 +90,9 @@ public class ArticleVenduDAO extends ArticleVendu {
 		sql = "SELECT * FROM ARTICLES_VENDUS";
 
 		try {
-			Connection con = connectionBDD();
-
-			PreparedStatement pstmt = con.prepareStatement(sql);
-
-			ResultSet rs = pstmt.executeQuery();
+			con = connectionBDD();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				ArticleVendu articleVendu = new ArticleVendu();
@@ -125,11 +124,10 @@ public class ArticleVenduDAO extends ArticleVendu {
 		sql = "SELECT * FROM Utilisateur where no_article=?";
 
 		try {
-			Connection con = connectionBDD();
-			
-			PreparedStatement pstmt = con.prepareStatement(sql);
+			con = connectionBDD();
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, noArticle);
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
 				articleVendu = new ArticleVendu();
