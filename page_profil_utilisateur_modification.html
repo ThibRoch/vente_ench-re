@@ -25,16 +25,15 @@
       <div class="container">
         <form action="" method="">
           <div class="user-info">
-            <div><label for="pseudo">Pseudo :</label> <input type="text" id="upseudo" name="pseudo" placeholder="Votre pseudo"></div>
-            <div><label for="nom">Nom :</label> <input type="text" id="unom" name="nom" placeholder="Votre nom de famille..."></div>
-            <div><label for="prenom">Prénom :</label> <input type="text" id="uprenom" name="prenom" placeholder="Votre prénom..."></div>
-            <div><label for="email">Email :</label> <input type="text" id="email" name="email" placeholder="Votre email..."></div>
-            <div><label for="telephone">Téléphone</label> <input type="text" id="telephone" name="telephone" placeholder="Votre téléphone..."></div>
-            <div><label for="rue">Rue</label><input type="text" id="rue" name="rue" placeholder="Votre rue..."></div>
-            <div><label for="cpostal">Code postal</label> <input type="text" id="cpostal" name="codepostal" placeholder="Votre code postal..."></div>
-            <div><label for="ville">Ville</label><input type="text" id="ville" name="ville" placeholder="Votre ville..."></div>
+            <div>Pseudo : <span>@username</span></div>
+            <div>Nom : <span>Nom de famille</span></div>
+            <div>Prénom : <span>Prénom</span></div>
+            <div>Email : <span>Email utilisateur</span></div>
+            <div>Téléphone : <span>Téléphone</span></div>
+            <div>Rue : <span class="info">La rue</span></div>
+            <div>Code postal : <span>12345</span></div>
+            <div>Ville : <span>Ville</span></div>
           </div>
-
           <button type="submit" class="modification">Modifier son profil</button>
         </form>
       </div>
@@ -45,9 +44,9 @@
 </body>
 
 </html>
-
-<style>
-/* - mise en page générale - */
+  
+  <style>
+    /* - mise en page générale - */
 body {
   margin: 0;
   font-size: 28px;
@@ -170,15 +169,28 @@ header img {
   width:50%;
 }
 
-input[type=text], select, textarea {
+.user-info span {
+  background-color:#fff;
+  font:14px var(--font-text);
+  border:1px #ccc solid;
   width:85%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+  padding:10px 0;
+  text-align:center;
   float:right;
-  box-sizing: border-box;
-  resize: vertical;
+  position:relative;
   margin:-10px -10px;
+  border-radius:10px;
+}
+
+.user-info p {
+  background-color:var(--text-color);
+  border:1px #ccc solid;
+  width:90%;
+  padding:10px 40%!important;
+  float:right;
+  position:relative;
+  margin:-10px -5px;
+  border-radius:10px;
 }
 
 .modification {
@@ -195,10 +207,10 @@ input[type=text], select, textarea {
 .modification:hover {
   opacity: 1;
 }
-</style>
-
-<script>
-window.onscroll = function () {
+  </style>
+  
+  <script>
+    window.onscroll = function () {
   myFunction();
 };
 var navbar = document.getElementById("navbar");
@@ -211,4 +223,4 @@ function myFunction() {
     navbar.classList.remove("sticky");
   }
 }
-</script>
+  </script>
