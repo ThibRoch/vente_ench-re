@@ -1,7 +1,7 @@
-package fr.eni.encheres_commun.bll;
+package fr.eni.eni_encheres.bll;
 
-import fr.eni.encheres_commun.bo.*;
-import fr.eni.encheres_commun.dal.RetraitDAO;
+import fr.eni.eni_encheres.bo.*;
+import fr.eni.eni_encheres.dal.RetraitDAO;
 
 public class RetraitManager {
 	
