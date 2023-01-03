@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
+<body>
+  <header>
+    <h3>Les objets sont nos amis</h3>
+    <img src="https://zupimages.net/up/22/51/hf35.jpg" />
+
+    <div id="navbar">
+      <a class="active" href="javascript:void(0)">Accueil</a>
+      <a href="javascript:void(0)">S'inscrire</a>
+      <a href="javascript:void(0)">Se connecter</a>
+    </div>
+  </header>
+
+  <form action="///" method="post">
+    <h1>Mon profil</h1>
+    <div class="contain">
+      <label for="pseudo"><b>Pseudo</b></label>
+      <input type="text" placeholder="Entrer votre pseudo" name="pseudo" id="pseudo" required>
+
+      <label for="nom"><b>Nom</b></label>
+      <input type="text" placeholder="Entrez votre nom" name="nom" id="nom" required>
+
+      <label for="prenom"><b>Prénom</b></label>
+      <input type="text" placeholder="Entrez votre prénom" name="prenom" id="prenom" required>
+
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Entrez votre email" name="email" id="email" required>
+
+      <label for="telephone"><b>Téléphone</b></label>
+      <input type="text" placeholder="Entrez votre numéro de téléphone" name="telephone" id="telephone" required>
+
+      <label for="rue"><b>Rue</b></label>
+      <input type="text" placeholder="Entrez votre rue" name="rue" id="rue" required>
+
+      <label for="codepost"><b>Code Postal</b></label>
+      <input type="text" placeholder="Entrez votre code postal" name="codepost" id="codepost" required>
+
+      <label for="ville"><b>Ville</b></label>
+      <input type="text" placeholder="Entrez votre ville" name="ville" id="ville" required>
+
+      <label for="mdp"><b>Mot de passe actuel</b></label>
+      <input type="password" placeholder="Entrez votre mot de passe" name="mdp" id="mdp" required>
+
+      <label for="newmdp"><b>Nouveau mot de passe</b></label>
+      <input type="password" placeholder="Entrez votre nouveau mot de passe" name="newmdp" id="newmdp" required>
+
+      <label for="mdp-repeat"><b>Confirmation de votre nouveau mot de passe</b></label>
+      <input type="password" placeholder="Confirmez votre mot de passe" name="mdp-repeat" id="mdp-repeat" required>
+      <hr>
+      <p>Votre crédit s'élève à xxx points.</p>
+
+      <button type="submit" class="enregistrer" style="width:40%;">Enregistrer</button>
+      <button type="submit" class="supprimer">Supprimer mon compte</button>
+    </div>
+
+    </div>
+  </form>
+
+</body>
+
+</html>
+
+<style>
+/* ---------- mise en page générale ---------- */
+
+body {
+  margin: 0;
+  font-size: 28px;
+  background-color:var(--bg-color);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ----- le root sert à rassembler toutes les valeurs utilisées afin de pouvoir les changer ensuite automatiquement ----- */
+
+:root {
+  --bg-color: #111111; /* fond noir */
+  --text-color: #f4f4f4; /* blanc */
+  --first-color: #B4AC72; /* doré */
+  --second-color: #343434; /* noir plus foncé */
+  --border-color:#cccccc /* gris */
+  --rgba: rgba(255, 255, 255, 0.5);
+  --radius:10px;
+
+  --font-title: "Playfair Display", serif;
+  --font-text: "Roboto Condensed", sans-serif;
+}
+
+/* ---------- mise en page de l'image de fond ---------- */
+
+h3 {
+  position:absolute;
+  top:50%;
+  left:1%;
+  border:2px var(--text-color) solid;
+  color:var(--text-color);
+  width:45%;
+  height:60px;
+  text-align:center;
+  text-transform:uppercase;
+  padding:30px 0;
+  font:40px var(--font-title);
+}
+
+@media only screen and (max-width: 600px) {
+  header img {
+  width: 100%;
+  height: 200px!important;
+  object-fit: cover;
+}
+  h3 {
+  position:absolute;
+  top:40%;
+  left:10%;
+  border:1px var(--text-color) solid;
+  color:var(--text-color);
+  width:80%;
+  height:23px;
+  text-align:center;
+  text-transform:uppercase;
+  padding:13px 0;
+  font:15px var(--font-title);
+  }
+}
+
+header img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+/* ---------- barre de navigation ---------- */
+
+#navbar {
+  overflow: hidden;
+  background-color: var(--first-color);
+  height:60px;
+  margin-top:-7px;
+}
+#navbar a {
+  float: right;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 10px 30px;
+  text-decoration: none;
+  font: 14px var(--font-title);
+  border-radius:10px;
+  margin:10px 10px 0 0;
+}
+#navbar a:hover {
+  background-color: var(--text-color);
+  color: black;
+}
+#navbar a.active {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+.sticky {
+  position: fixed;
+  top: 7px;
+  width: 100%;
+}
+.sticky + header {
+  padding-top: 60px;
+}
+
+/* ---------- formulaire d'inscription ---------- */
+h1 {
+  margin: 10px auto;
+  text-align: center;
+  background-color: var(--first-color);
+  color: var(--text-color);
+  height: 50px;
+  padding: 20px;
+  border-radius: 10px;
+  font: 30px var(--font-title);
+  font-weight: 700;
+}
+form {
+  margin:10px auto;
+  width:80%;
+}
+h2 {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--bg-color);
+  padding:20px 0 10px 0;
+  font: 15px var(--font-text);
+}
+hr {
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+p {
+  font:15px var(--font-text);
+}
+.contain {
+  padding: 16px;
+  background-color:var(--text-color);
+  border: 10px solid #e1e1e1;
+  border-radius:var(--radius);
+  outline:2px white solid;
+  -moz-outline-radius: 25px;
+}
+.contain b {
+  font:15px var(--font-title);
+  font-weight:500;
+}
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px #ccc solid;
+  box-sizing: border-box;
+  border-radius:var(--radius);
+  font:12px var(--font-text);
+  letter-spacing:1px;
+}
+input[type=text]:focus, input[type=password]:focus {
+  background-color: var(--border-color);
+  outline: none;
+}
+.enregistrer, .supprimer {
+  background-color: var(--first-color);
+  color: var(--text-color);
+  padding: 14px 20px;
+  margin: 0 auto;
+  border: none;
+  cursor: pointer;
+  width: 59.4%;
+  border-radius:var(--radius);
+  font:15px var(--font-title);
+  font-weight:400;
+  letter-spacing:2px;
+}
+.enregistrer:hover, .supprimer:hover {
+  opacity: 0.8;
+}
+</style>
+
+<script>
+window.onscroll = function () {
+  myFunction();
+};
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky");
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
