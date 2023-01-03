@@ -1,25 +1,25 @@
-package fr.eni.ventes_encheres.dal;
+package fr.eni.eni_encheres.dal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import fr.eni.bo.Retrait;
-import fr.eni.bo.Utilisateur;
+import fr.eni.eni_encheres.bo.*;
 
 public class RetraitDAO {
+	
+	private static Connection con = null;
+	private static PreparedStatement pstmt = null;
+	private static String sql = "";
+	private static ResultSet rs = null;
+	
 	private static RetraitDAO instance = null;
-
-	private RetraitDAO() {
-
-	}
+	private static Retrait retrait = null;
 
 	public static RetraitDAO getInstance() {
 		if (instance == null) {
@@ -28,39 +28,7 @@ public class RetraitDAO {
 		return instance;
 	}
 
-	public List<Retrait> getRetraitByUtilisateur(Utilisateur u) {
-		Connection con = null;
-		PreparedStatement stmt;
-		ResultSet rs;
-		List<Retrait> lst = new ArrayList<Retrait>();
-		Retrait ad;
-
-		try {
-			con = connectionBDD();
-			stmt = con.prepareStatement("select * from retraits where id_pn=? order by ville");
-			stmt.setInt(1, u.getId());
-			rs = stmt.executeQuery();
-			while (rs.next()) {
-				ad = new Retrait(rs.getInt("id"), rs.getString("rue"), rs.getString("ville"), u);
-				lst.add(ad);
-			}
-			u.setRetrait(lst);
-
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			con.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return lst;
-	}
-
 	private static Connection connectionBDD() throws ClassNotFoundException, SQLException {
-		Connection con = null;
 		DataSource ds;
 		InitialContext ctx;
 		try {
@@ -71,8 +39,31 @@ public class RetraitDAO {
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-
 		return con;
 	}
+	
+	public static Retrait getRetraitByArticle(ArticleVendu art) {
 
+		try {
+			con = connectionBDD();
+			sql = "select * from retraits where id_pn=? order by ville";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, art.getNoArticle());
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				retrait = new Retrait();
+				retrait.setRue(rs.getString("rue"));
+				retrait.setVille(rs.getString("ville"));
+				retrait.setCodePostal(rs.getString("code_postal"));
+				retrait.setArticleVendu(ArticleVenduDAO.findById(rs.getInt("no_article")));
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return retrait;
+	}
 }
