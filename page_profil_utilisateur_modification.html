@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
+<body>
+  <header>
+    <h3>Les objets sont nos amis</h3>
+    <img src="https://zupimages.net/up/22/51/hf35.jpg" />
+
+    <div id="navbar">
+      <a class="active" href="javascript:void(0)">Accueil</a>
+      <a href="javascript:void(0)">S'inscrire</a>
+      <a href="javascript:void(0)">Se connecter</a>
+    </div>
+  </header>
+
+  <article>
+    <section>
+      <h1>Profil utilisateur</h1>
+      <div class="container">
+        <form action="" method="">
+          <div class="user-info">
+            <div><label for="pseudo">Pseudo :</label> <input type="text" id="upseudo" name="pseudo" placeholder="Votre pseudo"></div>
+            <div><label for="nom">Nom :</label> <input type="text" id="unom" name="nom" placeholder="Votre nom de famille..."></div>
+            <div><label for="prenom">Prénom :</label> <input type="text" id="uprenom" name="prenom" placeholder="Votre prénom..."></div>
+            <div><label for="email">Email :</label> <input type="text" id="email" name="email" placeholder="Votre email..."></div>
+            <div><label for="telephone">Téléphone</label> <input type="text" id="telephone" name="telephone" placeholder="Votre téléphone..."></div>
+            <div><label for="rue">Rue</label><input type="text" id="rue" name="rue" placeholder="Votre rue..."></div>
+            <div><label for="cpostal">Code postal</label> <input type="text" id="cpostal" name="codepostal" placeholder="Votre code postal..."></div>
+            <div><label for="ville">Ville</label><input type="text" id="ville" name="ville" placeholder="Votre ville..."></div>
+          </div>
+
+          <button type="submit" class="modification">Modifier son profil</button>
+        </form>
+      </div>
+
+    </section>
+  </article>
+
+</body>
+
+</html>
+
+<style>
+/* - mise en page générale - */
+body {
+  margin: 0;
+  font-size: 28px;
+  background-color:var(--bg-color);
+  font:15px var(--font-text);
+}
+
+/* ----- le root sert à rassembler toutes les valeurs utilisées afin de pouvoir les changer ensuite automatiquement ----- */
+
+:root {
+  --bg-color: #111111; /* fond noir */
+  --text-color: #f4f4f4; /* blanc */
+  --first-color: #B4AC72; /* doré */
+  --second-color: #343434; /* noir plus foncé */
+  --border-color:#cccccc /* gris */
+  --rgba: rgba(255, 255, 255, 0.5);
+  --radius:10px;
+
+  --font-title: "Playfair Display", serif;
+  --font-text: "Roboto Condensed", sans-serif;
+}
+
+/* - mise en page des titres - */
+h1 {
+  margin: 10px auto;
+  text-align: center;
+  background-color: var(--first-color);
+  color: var(--text-color);
+  padding: 20px;
+  border-radius: 10px;
+  font: 30px var(--font-title);
+  font-weight: 700;
+  width:80%;
+}
+h2 {
+  font:30px var(--font-title);
+  color:var(--bg-color);
+  width:95%;
+  margin:10px;
+  text-align:center;
+  height:50px;
+}
+h3 {
+  position:absolute;
+  top:25%;
+  left:1%;
+  border:2px var(--text-color) solid;
+  color:var(--text-color);
+  width:45%;
+  height:120px;
+  text-align:center;
+  text-transform:uppercase;
+  padding:30px 0;
+  font:40px var(--font-title);
+}
+
+/* - mise en page du header - */
+header img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+} 
+
+/* - barre de navigation - */
+#navbar {
+  overflow: hidden;
+  background-color: var(--first-color);
+  height:60px;
+  z-index:10;
+  margin-top:-7px;
+}
+#navbar a {
+  float: right;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 10px 30px;
+  text-decoration: none;
+  font: 14px var(--font-title);
+  border-radius:10px;
+  margin:10px 10px 0 0;
+}
+#navbar a:hover {
+  background-color: var(--text-color);
+  color: black;
+}
+#navbar a.active {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+.sticky {
+  position: fixed;
+  top: 7px;
+  width: 100%;
+}
+.sticky + header {
+  padding-top: 60px;
+}
+
+/* ----- */
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  width:80%;
+  margin:10px auto;
+  position: relative;
+  border-radius: 5px;
+  background-color: var(--text-color);
+  padding: 20px 0 0 0;
+} 
+
+.user-info div {
+  height:50px;
+  font:15px var(--font-title);
+  margin:10px auto;
+  padding:15px;
+  width:50%;
+}
+
+input[type=text], select, textarea {
+  width:85%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  float:right;
+  box-sizing: border-box;
+  resize: vertical;
+  margin:-10px -10px;
+}
+
+.modification {
+  background-color: var(--first-color);
+  color: var(--text-color);
+  padding: 16px 30px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius:0 0 5px 5px;
+  opacity: 0.9;
+}
+
+.modification:hover {
+  opacity: 1;
+}
+</style>
+
+<script>
+window.onscroll = function () {
+  myFunction();
+};
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky");
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
