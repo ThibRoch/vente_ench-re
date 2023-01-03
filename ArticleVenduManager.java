@@ -1,9 +1,9 @@
-package fr.eni.encheres_commun.bll;
+package fr.eni.eni_encheres.bll;
 
 import java.util.List;
 
-import fr.eni.encheres_commun.bo.*;
-import fr.eni.encheres_commun.dal.ArticleVenduDAO;
+import fr.eni.eni_encheres.bo.*;
+import fr.eni.eni_encheres.dal.ArticleVenduDAO;
 
 public class ArticleVenduManager {
 	
