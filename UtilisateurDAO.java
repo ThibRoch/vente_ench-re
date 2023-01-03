@@ -16,9 +16,13 @@ import fr.eni.eni_encheres.bo.*;
 public class UtilisateurDAO {
 
 	private static Connection con = null;
-	private static UtilisateurDAO instance = null;
 	private static String sql = "";
-
+	private static PreparedStatement pstmt = null;
+	private static ResultSet rs = null;
+	
+	private static UtilisateurDAO instance = null;
+	private static Utilisateur user = null;
+	
 	public static UtilisateurDAO getInstance() {
 		if (instance == null)
 			instance = new UtilisateurDAO();
@@ -29,10 +33,12 @@ public class UtilisateurDAO {
 	private static Connection connectionBDD() throws ClassNotFoundException, SQLException {
 		DataSource ds;
 		InitialContext ctx;
+		
 		try {
 			ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/pool_cnx");
 			con = ds.getConnection();
+			
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -46,11 +52,11 @@ public class UtilisateurDAO {
 			con = connectionBDD();
 			sql = "SELECT * FROM Utilisateurs WHERE email=? and password=?";
 	
-			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			pstmt.setString(2, motDePasse);
 
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				user = new Utilisateur();
@@ -67,6 +73,7 @@ public class UtilisateurDAO {
 				user.setCredit(rs.getInt("credit"));
 				user.setAdmin(rs.getBoolean("admin"));
 			}
+			
 			rs.close();
 			pstmt.close();
 			con.close();
@@ -83,7 +90,7 @@ public class UtilisateurDAO {
 			con = connectionBDD();
 			sql = "INSERT INTO Utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
-			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, user.getPseudo());
 			pstmt.setString(2, user.getNom());
 			pstmt.setString(3, user.getPrenom());
@@ -111,7 +118,7 @@ public class UtilisateurDAO {
 			con = connectionBDD();
 			sql = "DELETE FROM Utilisateurs WHERE pseudo=?";
 			
-			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, pseudo);
 			pstmt.executeUpdate();
 			
@@ -123,14 +130,13 @@ public class UtilisateurDAO {
 		}
 	}
 
-	
 	public static void update(Utilisateur user){
 		
 		try {
 			con = connectionBDD();
 			sql = "UPDATE Utilisateur set pseudo=?,nom=?,prenom=?,email=?,telephone=?,rue=?,code_postal=?,ville=?,mot_de_passe=? WHERE id=?";
 			
-			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, user.getPseudo());
 			pstmt.setString(2, user.getNom());
 			pstmt.setString(3, user.getPrenom());
@@ -151,12 +157,9 @@ public class UtilisateurDAO {
 		}
 	}
 
-	
 	public List<Utilisateur> findAll(String field, String sens) {
 
 		List<Utilisateur> users = new ArrayList<Utilisateur>();
-		PreparedStatement pstmt;
-		Utilisateur user = null;
 
 		try {
 			con = connectionBDD();
@@ -167,7 +170,7 @@ public class UtilisateurDAO {
 				sql = "SELECT * FROM Utilisateur";
 			
 			pstmt = con.prepareStatement(sql);
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				user = new Utilisateur();
@@ -197,17 +200,15 @@ public class UtilisateurDAO {
 		return users;
 	}
 
-	
 	public static Utilisateur findByPseudo(String pseudo) {
-		Utilisateur user = null;
 
 		try {
 			con = connectionBDD();
 			sql = "SELECT * FROM Utilisateurs WHERE pseudo=?";
 			
-			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, pseudo);
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				user = new Utilisateur();
@@ -224,6 +225,7 @@ public class UtilisateurDAO {
 				user.setCredit(rs.getInt("credit"));
 				user.setAdmin(rs.getBoolean("admin"));
 			}
+			
 			rs.close();
 			pstmt.close();
 			con.close();
@@ -234,17 +236,15 @@ public class UtilisateurDAO {
 		return user;
 	}
 
-	
 	public static Utilisateur findByEmail(String email) {
-		Utilisateur user = null;
 
 		try {
 			con = connectionBDD();
 			sql = "SELECT * FROM Utilisateurs WHERE email=?";
 			
-			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				user = new Utilisateur();
@@ -261,6 +261,7 @@ public class UtilisateurDAO {
 				user.setCredit(rs.getInt("credit"));
 				user.setAdmin(rs.getBoolean("admin"));
 			}
+			
 			rs.close();
 			pstmt.close();
 			con.close();
