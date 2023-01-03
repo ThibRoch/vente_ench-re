@@ -17,11 +17,12 @@ import fr.eni.eni_encheres.bo.*;
 public class EnchereDAO {
 
 	private static Connection con;
-	private static EnchereDAO instance = null;
 	private static String sql="";
-
-	private EnchereDAO() {
-	}
+	private static PreparedStatement pstmt = null;
+	private static ResultSet rs = null;
+	
+	private static EnchereDAO instance = null;
+	private static Enchere enchere = null;
 
 	public static EnchereDAO getInstance() {
 		if (instance == null) {
@@ -45,17 +46,14 @@ public class EnchereDAO {
 		return con;
 	}
 
-	public EnchereDAO(Connection con) {
-		EnchereDAO.con = con;
-	}
-
 	public void addEnchere(Enchere enchere){
 		sql = "INSERT INTO encheres (date_enchere, no_article, montant_enchere, no_utilisateur) VALUES (?, ?, ?, ?)";
 		
 		try  {
 			con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement(sql);
-
+			sql = "INSERT INTO encheres (date_enchere, no_article, montant_enchere, no_utilisateur) VALUES (?, ?, ?, ?)";
+			
+			pstmt = con.prepareStatement(sql);
 			pstmt.setDate(1, (Date) enchere.getDateEnchere());
 			pstmt.setString(2, enchere.getNomArticle());
 			pstmt.setInt(3, enchere.getMontantEnchere());
@@ -71,16 +69,17 @@ public class EnchereDAO {
 	}
 
 	public List<Enchere> getEncheres(){
-		sql = "SELECT * FROM encheres";
+		
 		List<Enchere> encheres = new ArrayList<>();
 		
 		try {
 			con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement(sql);
-			ResultSet rs = pstmt.executeQuery();
+			sql = "SELECT * FROM encheres";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				Enchere enchere = new Enchere();
+				enchere = new Enchere();
 				enchere.setDateEnchere(rs.getDate("date_enchere"));
 				enchere.setNomArticle(rs.getString("no_article"));
 				enchere.setMontantEnchere(rs.getInt("montant_enchere"));
