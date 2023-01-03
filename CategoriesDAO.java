@@ -14,10 +14,14 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class CategorieDAO {
+	
+	private static Connection con = null;
+	private static String sql = "";
+	private static PreparedStatement pstmt = null;
+	private static ResultSet rs = null;
+	
 	private static CategorieDAO instance = null;
-
-	private CategorieDAO() {
-	}
+	private static Categorie categorie = null;
 
 	public static CategorieDAO getInstance() {
 		if (instance == null) {
@@ -27,9 +31,9 @@ public class CategorieDAO {
 	}
 
 	private static Connection connectionBDD() throws ClassNotFoundException, SQLException {
-		Connection con = null;
 		DataSource ds;
 		InitialContext ctx;
+		
 		try {
 			ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/pool_cnx");
@@ -38,42 +42,41 @@ public class CategorieDAO {
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-
 		return con;
 	}
 
     public void create(Categorie categorie){
-    	Connection con;
 	try {
 		con = connectionBDD();
-
-		String sql = "INSERT INTO categorie (libelle) VALUES (?)";
-		PreparedStatement pstmt = con.prepareStatement(sql);
+		sql = "INSERT INTO categorie (libelle) VALUES (?)";
+		
+		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, categorie.getLibelle());
 		pstmt.executeUpdate();
 		
 		pstmt.close();
 		con.close();
+		
 	} catch (SQLException | ClassNotFoundException e) {
 		e.printStackTrace();
 	}
     }
 
     public Categorie read(int noCategorie){
-    	Connection con;
-	int id = 0;
-	String libelle = null;
 	    
 	try {
 		con = connectionBDD();
-		String sql = "SELECT * FROM categorie WHERE no_categorie = ?";
-		PreparedStatement pstmt = con.prepareStatement(sql);
+		sql = "SELECT * FROM categorie WHERE no_categorie = ?";
+		
+		pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1, noCategorie);
-		ResultSet rs = pstmt.executeQuery();
+		
+		rs = pstmt.executeQuery();
 
 		if (rs.next()) {
-		    id = rs.getInt("no_categorie");
-		    libelle = rs.getString("libelle");
+			categorie = new Categorie();
+			categorie.setNoCategorie(rs.getInt("no_categorie"));
+			categorie.setLibelle(rs.getString("libelle"));
         	}
 		
 		rs.close();
@@ -83,16 +86,16 @@ public class CategorieDAO {
 	} catch (SQLException | ClassNotFoundException e) {
 		e.printStackTrace();
 	}
-	return new Categorie(id, libelle);
+	return new Categorie(categorie);
     }
 
     public void update(Categorie categorie){
-    	Connection con;
 	    
 	try {
 		con = connectionBDD();
-		String sql = "UPDATE categorie SET libelle = ? WHERE no_categorie = ?";
-		PreparedStatement pstmt = con.prepareStatement(sql);
+		sql = "UPDATE categorie SET libelle = ? WHERE no_categorie = ?";
+		
+		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, categorie.getLibelle());
 		pstmt.setInt(2, categorie.getNoCategorie());
 		pstmt.executeUpdate();
@@ -106,12 +109,12 @@ public class CategorieDAO {
     }
 
     public void delete(int noCategorie){
-    	Connection con;
 	    
 	try {
 		con = connectionBDD();
-		String sql = "DELETE FROM categorie WHERE no_categorie = ?";
-		PreparedStatement pstmt = con.prepareStatement(sql);
+		sql = "DELETE FROM categorie WHERE no_categorie = ?";
+		
+		pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1, noCategorie);
 		pstmt.executeUpdate();
 
@@ -124,19 +127,20 @@ public class CategorieDAO {
     }
 
     public List<Categorie> getAll(){
-    	Connection con;
+	    
 	List<Categorie> categories = new ArrayList<>();
 	    
 	try {
 		con = connectionBDD();
-		String sql = "SELECT * FROM categorie";
-		PreparedStatement pstmt = con.prepareStatement(sql);
-		ResultSet rs = pstmt.executeQuery();
+		sql = "SELECT * FROM categorie";
+		pstmt = con.prepareStatement(sql);
+		rs = pstmt.executeQuery();
 		
 		while (rs.next()) {
-		    int id = rs.getInt("no_categorie");
-		    String libelle = rs.getString("libelle");
-		    categories.add(new Categorie(id, libelle));
+			categorie = new Categorie();
+			categorie.setNoCategorie(rs.getInt("no_categorie"));
+		 	categorie.setLibelle(rs.getString("libelle"));
+			categories.add(categorie);
 		}
 		
 		rs.close();
