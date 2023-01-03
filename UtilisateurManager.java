@@ -1,21 +1,18 @@
-package fr.eni.BLL;
+package fr.eni.eni_encheres.bll;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import fr.eni.BO.Utilisateur;
-import fr.eni.DAL.UtilisateurDAO;
-
+import fr.eni.eni_encheres.bo.Utilisateur;
+import fr.eni.eni_encheres.dal.UtilisateurDAO;
 
 public class UtilisateurManager {
 
 	private static UtilisateurManager instance = null;
-	private UtilisateurDAO utilisateurDAO;
 
 	private UtilisateurManager(UtilisateurDAO utilisateurDAO) {
-		this.utilisateurDAO = utilisateurDAO;
 	}
 
+	//SINGLETON
 	public static UtilisateurManager getInstance() {
 		if (instance == null) {
 			instance = new UtilisateurManager(UtilisateurDAO.getInstance());
@@ -23,26 +20,25 @@ public class UtilisateurManager {
 		return instance;
 	}
 
-	public Utilisateur login(String email, String password) {
-		return UtilisateurDAO.login(email, password);
+	//Méthodes métiers
+	public Utilisateur login(String email, String pwd) {
+		return UtilisateurDAO.login(email, pwd);
 	}
 	
-	public void create(Utilisateur user) throws SQLException {
+	public void create(Utilisateur user) {
 		UtilisateurDAO.create(user);
 	}
-
-	/*public void save(Utilisateur utilisateur) {
-		utilisateur.setNom(utilisateur.getNom());
-		UtilisateurDAOJdbcImpl.save(utilisateur);
-	}*/
-
-	public void update(Utilisateur u)  {
-		UtilisateurDAO.update(u);
-	}
 	
-	public List<Utilisateur> findAll(String field,String sens) {
-		return utilisateurDAO.findAll(field,sens);
+	public void deleteByPseudo(String pseudo) {
+			UtilisateurDAO.deleteByPseudo(pseudo);
+	}
 
+	public void update(Utilisateur user)  {
+			UtilisateurDAO.update(user);
+	}
+
+	public List<Utilisateur> findAll(String field, String sens){
+		return UtilisateurDAO.findAll(field,sens);
 	}
 
 	public Utilisateur findByPseudo(String pseudo) {
@@ -54,11 +50,7 @@ public class UtilisateurManager {
 		return UtilisateurDAO.findByEmail(email);
 	}
 
-	public void deleteByPseudo(String pseudo) {
-			UtilisateurDAO.deleteByPseudo(pseudo);
-
-	}
-
+	// Vérification des paramètres
 	public boolean verificationEmail(String email) {
 		if (email.contains("@")) {
 			return true;
@@ -67,53 +59,20 @@ public class UtilisateurManager {
 		return false;
 	}
 
-	public boolean verifPassword(String password) {
+	public boolean verifPassword(String pwd) {
 		char mdp;
 		boolean numberOK = false;
 		boolean lettreOK = false;
-		for (int i = 0; i < password.length(); i++) {
-			mdp = password.charAt(i);
-			if (Character.isDigit(mdp)) {
+		
+		for (int i = 0; i < pwd.length(); i++) {
+			mdp = pwd.charAt(i);
+			
+			if (Character.isDigit(mdp))
 				numberOK = true;
-			} else if (Character.isLetter(mdp)) {
+				
+			else if (Character.isLetter(mdp))
 				lettreOK = true;
-			}
 		}
 		return numberOK && lettreOK;
 	}
-	/*
-	 * String mot = mdp;
-	 * 
-	 * boolean aAuMoinsUneLettre = false; boolean aAuMoinsUnChiffre = false; boolean
-	 * lesLettresSontToutesDesMajuscules = true; boolean aUnCaractereSpecial =
-	 * false;
-	 * 
-	 * for (int i=0; i < mot.length(); i++) { char caractereATraiter =
-	 * mot.charAt(i);
-	 * 
-	 * if ( Character.isDigit(caractereATraiter) ) { aAuMoinsUnChiffre = true; }
-	 * else if ( Character.isLetter(caractereATraiter) ) { aAuMoinsUneLettre = true;
-	 * if ( Character.isLowerCase(caractereATraiter) )
-	 * lesLettresSontToutesDesMajuscules = false; } else { aUnCaractereSpecial =
-	 * true; } }
-	 * 
-	 * StringBuilder erreurs = new StringBuilder("Merci d'entrer");
-	 * 
-	 * boolean aUneErreur = false;
-	 * 
-	 * if(!aAuMoinsUneLettre) { aUneErreur = true;
-	 * erreurs.append(" au moins une lettre\n"); }
-	 * 
-	 * if(!aAuMoinsUnChiffre) { if(aUneErreur) erreurs.append(","); aUneErreur =
-	 * true; erreurs.append(" au moins un chiffre\n"); }
-	 * 
-	 * if(!lesLettresSontToutesDesMajuscules) { if(aUneErreur) erreurs.append(",");
-	 * aUneErreur = true; erreurs.append(" les lettres en majuscules\n"); }
-	 * 
-	 * if(aUnCaractereSpecial) { if(aUneErreur) erreurs.append(","); aUneErreur =
-	 * true; erreurs.append(" uniquement des lettres ou chiffres/n"); }
-	 * 
-	 * if (aUneErreur == true) throw new ErreurSaisieException (erreurs.toString());
-	 * return mot; // si aucune exception est levée on retourne le mot }
-	 */
 }
