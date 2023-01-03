@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 
 import fr.eni.eni_encheres.bo.*;
 
-public class ArticleVenduDAO extends ArticleVendu{
+public class ArticleVenduDAO{
 	
 	private static Connection con = null;
 	private static PreparedStatement pstmt = null;
