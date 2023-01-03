@@ -1,9 +1,9 @@
-package fr.eni.encheres_commun.bll;
+package fr.eni.eni_encheres.bll;
 
 import java.util.List;
 
-import fr.eni.encheres_commun.bo.Enchere;
-import fr.eni.encheres_commun.dal.EnchereDAO;
+import fr.eni.eni_encheres.bo.Enchere;
+import fr.eni.eni_encheres.dal.EnchereDAO;
 
 public class EnchereManager {
 
