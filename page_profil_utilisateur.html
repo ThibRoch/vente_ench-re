@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
+<body>
+  <header>
+    <h3>Les objets sont nos amis</h3>
+    <img src="https://zupimages.net/up/22/51/hf35.jpg" />
+
+    <div id="navbar">
+      <a class="active" href="javascript:void(0)">Accueil</a>
+      <a href="javascript:void(0)">S'inscrire</a>
+      <a href="javascript:void(0)">Se connecter</a>
+    </div>
+  </header>
+
+  <article>
+    <section>
+      <h1>Profil utilisateur</h1>
+      <div class="container">
+        <form action="" method="">
+          <div class="user-info">
+            <div>Pseudo : <span>@username</span></div>
+            <div>Nom : <span>Nom de famille</span></div>
+            <div>Prénom : <span>Prénom</span></div>
+            <div>Email : <span>Email utilisateur</span></div>
+            <div>Téléphone : <span>Téléphone</span></div>
+            <div>Rue : <span class="info">La rue</span></div>
+            <div>Code postal : <span>12345</span></div>
+            <div>Ville : <span>Ville</span></div>
+          </div>
+        </form>
+      </div>
+
+    </section>
+  </article>
+
+</body>
+
+</html>
+
+<style>
+/* - mise en page générale - */
+body {
+  margin: 0;
+  font-size: 28px;
+  background-color:var(--bg-color);
+  font:15px var(--font-text);
+}
+
+/* ----- le root sert à rassembler toutes les valeurs utilisées afin de pouvoir les changer ensuite automatiquement ----- */
+
+:root {
+  --bg-color: #111111; /* fond noir */
+  --text-color: #f4f4f4; /* blanc */
+  --first-color: #B4AC72; /* doré */
+  --second-color: #343434; /* noir plus foncé */
+  --border-color:#cccccc /* gris */
+  --rgba: rgba(255, 255, 255, 0.5);
+  --radius:10px;
+
+  --font-title: "Playfair Display", serif;
+  --font-text: "Roboto Condensed", sans-serif;
+}
+
+/* - mise en page des titres - */
+h1 {
+  margin: 10px auto;
+  text-align: center;
+  background-color: var(--first-color);
+  color: var(--text-color);
+  padding: 20px;
+  border-radius: 10px;
+  font: 30px var(--font-title);
+  font-weight: 700;
+  width:80%;
+}
+h2 {
+  font:30px var(--font-title);
+  color:var(--bg-color);
+  width:95%;
+  margin:10px;
+  text-align:center;
+  height:50px;
+}
+h3 {
+  position:absolute;
+  top:25%;
+  left:1%;
+  border:2px var(--text-color) solid;
+  color:var(--text-color);
+  width:45%;
+  height:120px;
+  text-align:center;
+  text-transform:uppercase;
+  padding:30px 0;
+  font:40px var(--font-title);
+}
+
+/* - mise en page du header - */
+header img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+} 
+
+/* - barre de navigation - */
+#navbar {
+  overflow: hidden;
+  background-color: var(--first-color);
+  height:60px;
+  z-index:10;
+  margin-top:-7px;
+}
+#navbar a {
+  float: right;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 10px 30px;
+  text-decoration: none;
+  font: 14px var(--font-title);
+  border-radius:10px;
+  margin:10px 10px 0 0;
+}
+#navbar a:hover {
+  background-color: var(--text-color);
+  color: black;
+}
+#navbar a.active {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+.sticky {
+  position: fixed;
+  top: 7px;
+  width: 100%;
+}
+.sticky + header {
+  padding-top: 60px;
+}
+
+/* ----- */
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  width:80%;
+  margin:10px auto;
+  position: relative;
+  border-radius: 5px;
+  background-color: var(--text-color);
+  padding: 20px 0;
+} 
+
+.user-info div {
+  height:50px;
+  font:15px var(--font-title);
+  margin:10px auto;
+  padding:15px;
+  width:50%;
+}
+
+.user-info span {
+  background-color:#fff;
+  font:14px var(--font-text);
+  border:1px #ccc solid;
+  width:85%;
+  padding:10px 0;
+  text-align:center;
+  float:right;
+  position:relative;
+  margin:-10px -10px;
+  border-radius:10px;
+}
+
+.user-info p {
+  background-color:var(--text-color);
+  border:1px #ccc solid;
+  width:90%;
+  padding:10px 40%!important;
+  float:right;
+  position:relative;
+  margin:-10px -5px;
+  border-radius:10px;
+}</style>
+
+<script>
+window.onscroll = function () {
+  myFunction();
+};
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky");
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
