@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
+<body>
+  <header>
+    <h3>Les objets sont nos amis</h3>
+    <img src="https://zupimages.net/up/22/51/hf35.jpg" />
+
+    <div id="navbar">
+      <a class="active" href="javascript:void(0)">Accueil</a>
+      <a href="javascript:void(0)">S'inscrire</a>
+      <a href="javascript:void(0)">Se connecter</a>
+    </div>
+  </header>
+
+  <section>
+    <article>
+      <form action="///" method="post">
+        <div class="contain">
+          <h1>@utilisateur a remporté l'enchère</h1>
+
+          <div class="enchere">
+            <img src="https://via.placeholder.com/350x150" />
+            <div>nom de l'article</div>
+            <b>Description</b>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed placerat at massa quis tincidunt. Proin eu massa ut eros interdum sagittis. Sed luctus odio et ultricies volutpat. Donec lorem tellus, finibus ac tellus eget, feugiat molestie risus. Sed pulvinar eget mauris et auctor. Vivamus eget pulvinar augue. Nunc lorem leo, pellentesque ut massa vitae, eleifend aliquet tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed placerat at massa quis tincidunt. Proin eu massa ut eros interdum sagittis. Sed luctus odio et ultricies volutpat. Donec lorem tellus, finibus ac tellus eget, feugiat molestie risus. Sed pulvinar eget mauris et auctor. Vivamus eget pulvinar augue. Nunc lorem leo, pellentesque ut massa vitae, eleifend aliquet tortor.</p>
+          </div>
+
+          <div class="user-info">
+            <div>Meilleure offre : <span>texte ici</span></div>
+            <div>Mise à prix : <span>texte ici</span></div>
+            <div>Fin de l'enchère : <span>texte ici</span></div>
+            <div>Retrait : <span>texte ici</span></div>
+            <div>Vendeur : <span>texte ici</span></div>
+          </div>
+
+          <button type="submit" class="supprimer">Retrait effectué</button>
+        </div>
+
+        </div>
+      </form>
+  </section>
+  </article>
+
+</body>
+
+</html>
+
+<style>
+  /* ---------- mise en page générale ---------- */
+
+body {
+  margin: 0;
+  font-size: 28px;
+  background-color:var(--bg-color);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ----- le root sert à rassembler toutes les valeurs utilisées afin de pouvoir les changer ensuite automatiquement ----- */
+
+:root {
+  --bg-color: #111111; /* fond noir */
+  --text-color: #f4f4f4; /* blanc */
+  --first-color: #B4AC72; /* doré */
+  --second-color: #343434; /* noir plus foncé */
+  --border-color:#cccccc /* gris */
+  --rgba: rgba(255, 255, 255, 0.5);
+  --radius:10px;
+
+  --font-title: "Playfair Display", serif;
+  --font-text: "Roboto Condensed", sans-serif;
+}
+
+/* ---------- mise en page de l'image de fond ---------- */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+h3 {
+  position:absolute;
+  top:25%;
+  left:1%;
+  border:2px var(--text-color) solid;
+  color:var(--text-color);
+  width:60%;
+  height:60px;
+  text-align:center;
+  text-transform:uppercase;
+  padding:30px 0;
+  font:40px var(--font-title);
+}
+
+@media only screen and (max-width: 600px) {
+  header img {
+  width: 100%;
+  height: 200px!important;
+  object-fit: cover;
+}
+  h3 {
+  position:absolute;
+  top:40%;
+  left:10%;
+  border:1px var(--text-color) solid;
+  color:var(--text-color);
+  width:80%;
+  height:23px;
+  text-align:center;
+  text-transform:uppercase;
+  padding:13px 0;
+  font:15px var(--font-title);
+  }
+}
+
+header img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+/* ---------- barre de navigation ---------- */
+
+#navbar {
+  overflow: hidden;
+  background-color: var(--first-color);
+  height:60px;
+  margin-top:-7px;
+}
+#navbar a {
+  float: right;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 10px 30px;
+  text-decoration: none;
+  font: 14px var(--font-title);
+  border-radius:10px;
+  margin:10px 10px 0 0;
+}
+#navbar a:hover {
+  background-color: var(--text-color);
+  color: black;
+}
+#navbar a.active {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+.sticky {
+  position: fixed;
+  top: 7px;
+  width: 100%;
+}
+.sticky + header {
+  padding-top: 60px;
+}
+
+/* ---------- formulaire d'inscription ---------- */
+h1 {
+  margin: 0 auto 10px auto;
+  width:100%;
+  text-align: center;
+  background-color: var(--first-color);
+  color: var(--text-color);
+  height: 80px;
+  padding: 20px;
+  border-radius: 10px;
+  font: 30px var(--font-title);
+  font-weight: 700;
+}
+form {
+  margin:10px auto;
+  width:80%;
+}
+h2 {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--bg-color);
+  padding:20px 0 10px 0;
+  font: 15px var(--font-text);
+}
+hr {
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+p {
+  font:15px var(--font-text);
+}
+.contain {
+  padding: 16px;
+  background-color:var(--text-color);
+  border: 10px solid #e1e1e1;
+  border-radius:var(--radius);
+  outline:2px white solid;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  
+}
+.contain b {
+  font:15px var(--font-title);
+  font-weight:500;
+}
+
+.enchere {
+  display:flex;
+  flex-wrap:wrap;
+  justif-content:space-between;
+}
+.enchere img {
+  width:350px;
+  height:150px;
+  object-fit:cover;
+  border-radius:10px;
+}
+.enchere div {
+  font:25px var(--font-title);
+  width:52.5%;
+  margin:50px 0 0 10px;
+  text-align:center;
+}
+.enchere b {
+  font:15px var(--font-title);
+  margin:10px 0 5px 0;
+  
+}
+.enchere p {
+  display:block;
+  font:12px var(--font-text);
+  height:45px;
+  text-align:justify;
+  margin:0 0 10px 0;
+}
+.user-info {
+  width:100%;
+  margin:10px 0 0 0;
+}
+
+.user-info div {
+  height:50px;
+  font:15px var(--font-title);
+  margin:10px auto;
+  padding:15px;
+}
+
+.user-info span {
+  background-color:#fff;
+  font:14px var(--font-text);
+  border:1px #ccc solid;
+  width:85%;
+  padding:10px 0;
+  text-align:center;
+  float:right;
+  position:relative;
+  margin:-10px -10px;
+  border-radius:10px;
+}
+
+.user-info p {
+  background-color:var(--text-color);
+  border:1px #ccc solid;
+  width:90%;
+  padding:10px 40%!important;
+  float:right;
+  position:relative;
+  margin:-10px -5px;
+  border-radius:10px;
+}
+
+.supprimer {
+  background-color: var(--first-color);
+  color: var(--text-color);
+  padding: 14px 20px;
+  margin: 0 auto;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius:var(--radius);
+  font:15px var(--font-title);
+  font-weight:400;
+  letter-spacing:2px;
+}
+.supprimer:hover {
+  opacity: 0.8;
+}
+</style>
+
+<script>
+  window.onscroll = function () {
+  myFunction();
+};
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky");
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
