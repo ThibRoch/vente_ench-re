@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="">
+<title>Les objets sont nos amis</title>
+</head>
+<body>
+</head>
+<body>
+
+	<header>
+		<img src="https://zupimages.net/up/22/51/hf35.jpg" />
+		<nav>
+			<div>Les objets sont nos amis !</div>
+			<ul>
+				<li><a href="${pageContext.request.contextPath}/ServletCreer"
+					id="modification">Modifier son compte </a></li>
+				<li><a href="${pageContext.request.contextPath}/ServletDeconnection"
+					id="déconnexion">Se déconnecter</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<h1>Nouvelle vente</h1>
+
+	<form method="post" action="Servlet">
+
+		<fieldset>
+
+			<img src=""> 
+			<label for="article"><b> Article : </b></label><input
+				type="text" name="article" id="article" value=""> 
+			<label for="description"><b> Description : : </b></label><input type="text"
+				name="description" id="description" value="" maxlength="500">
+			<label for="categorie"> Catégorie :</label> <select name="categorie">
+				<optgroup>
+					<option>Toutes</option>
+					<option>Informatique</option>
+					<option>Ameublement</option>
+					<option>Vêtement</option>
+					<option>Sport/Loisir</option>
+				</optgroup>
+			</select> 
+			<label for="upload"><b>Photo de l'article</b></label><input
+				type="file" name="upload" onclick="" accept="image/png, image/jpeg">
+			<label for="prix"> <b>Mise a prix</b></label><input type="number"
+				name="prix" min="10" max="2000"> 
+			<label for="début_enchère"><b>Début de l'enchère :</b></label><input type="date" value="" name="firstdate">
+			<label for="fin_enchère"><b> Fin de l'enchère :</b></label><input
+				type="date" name="lastdate" min="" max="">
+
+		</fieldset>
+
+		<fieldset>
+			<legend> Retrait : </legend>
+			<label for="rue"><b> Rue : </b></label><input type="text" name="rue"
+				id="rue" value="${Utilisateur.rue}"> 
+			<label for="codpost"><b>Code Postal : </b></label><input type="text" name="codepost" id="codepost" value="${Utilisateur.codepost}">
+			<label for="ville"><b> Ville : </b></label><input type="text"
+				name="ville" id="ville" value="${Utilisateur.ville}">
+		</fieldset>
+
+		<button type="submit" onclick="">Enregistrer</button>
+		<button type="reset" onclick="">Annuler</button>
+		<button type="reset" onclick="">Annuler la vente</button>
+
+	</form>
+
+</body>
+</html>
