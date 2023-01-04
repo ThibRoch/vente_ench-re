@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="">
+<title>Les objets sont nos amis </title>
+</head>
+<body>
+
+	<header>
+		<img src="https://zupimages.net/up/22/51/hf35.jpg" />
+		<nav>
+			<div>Les objets sont nos amis !</div>
+			<ul>
+				<li><a href="${pageContext.request.contextPath}/ServletCreer"
+					id="modification">Modifier son compte </a></li>
+				<li><a href="${pageContext.request.contextPath}/ServletDeconnection"
+					id="déconnexion">Se déconnecter</a></li>
+			</ul>
+		</nav>
+	</header>
+	
+	<h1> Détail vente</h1>
+		
+		<form method="post" action="Servlet">
+
+		<fieldset>
+
+			<img src=""> 
+			<input type="text" name="nomArticle" id="article" value="${ArticleVendu.nomArticle}"> 
+			<label for="description"><b> Description : : </b></label><input type="text" name="description" id="description" value="${ArticleVendu.description}" maxlength="500">
+			<label for="categorie"><b>Catégorie :</b></label> <input type="text" name="categorie" value="${Categorie.libelle}">
+			
+			<label for="offre"> Meilleure offre : </label><input type="text" name="offre" value="${Enchere.montantEnchere}">
+			<label for="prix"> <b>Mise a prix</b></label><input type="number" name="prix" value="${Article.miseAPrix}"> 
+			<label for="fin_enchere"><b> Fin de l'enchère :</b></label><input type="text" name="lastdate" value="${Enchere.dateEnchere}">
+
+			<label for="retrait"><b> Retrait :</b></label><input type="text" name="adresse" value="${Retrait.}">
+			<label for="vendeur"><b> Vendeur :</b></label><input type="text" name="vendeur" value="${ArticleVendu.vendeur}">
+			<label for="enchere"><b> Ma proposition :</b></label><input type="number" name="enchere" min="${Enchere.montantEnchere}">
+			
+			<button type="submit" onclick=""> Enchérir</button>
+			
+		</fieldset>
+	
+	</form>
+
+</body>
+</html>
