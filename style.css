@@ -95,6 +95,7 @@ pour changer automatiquement dans le reste du code - */
   }
   nav ul {
     list-style:none;
+    margin-top:10px;
   }
   nav a:hover {
     background-color: var(--rgba);
@@ -134,7 +135,7 @@ pour changer automatiquement dans le reste du code - */
 
     /* - PAGE CONNEXION A SON COMPTE - */
     input[type="text"],
-    input[type="password"] {
+    input[type="password"], input[type="number"] {
       width: 100%;
       padding: 12px 20px;
       margin: 8px 0;
@@ -268,6 +269,29 @@ pour changer automatiquement dans le reste du code - */
     color:var(--first-color);
     text-decoration:none;
   }
+
+  /* - PAGE LISTE DES ENCHERES - */
+  fieldset {
+    border:none;
+    margin:10px auto 5px auto;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+  }
+  #achat, #vente {
+    background-color:#f4f4f4;
+    border-radius:10px;
+    border:1px #ccc solid;
+    padding:20px 65px;
+    margin:0 10px;
+    text-align:center;
+  }
+  input[type=radio].ventes + label {
+    border-bottom:1px var(--first-color) dotted;
+    padding:5px 50px;
+    background-color:pink;
+  }
+
   /* - PAGE MODIFIER PROFIL - */
   .enregistrer, .supprimer {
     background-color: var(--first-color);
@@ -290,89 +314,7 @@ pour changer automatiquement dans le reste du code - */
     opacity: 0.8;
   }
 
-  /* - LISTE DES ENCHERES - */
-
-.recherche {
-  display: flex;
-  justify-content: space-between;
-  font-weight: 700;
-  height: 50px;
-  width: 97%;
-  margin: 0 auto 10px auto;
-  border-bottom: 5px var(--first-color) dotted;
-}
-.recherche > div {
-  font: 30px var(--font-title);
-}
-input[type="search"],
-select {
-  width: 100%;
-  padding: 12px 20px;
-  height: 40px !important;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-sizing: border-box;
-}
-.label {
-  color:white;
-  width:100%;
-  padding:10px;
-}
-.filtres, .categories {
-  font:18px var(--font-title);
-  color:var(--bg-color);
-}
-option {
-  font: 12px var(--font-text);
-  letter-spacing:2px!important;
-}
-button {
-  height: 50px !important;
-  width:100%;
-  border-radius:10px;
-}
-.bloc_enchere {
-  width:47%;
-  background-color:var(--bg-color)!important;
-  margin:0 10px;
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:space-between;
-  border-radius:10px;
-}
-.bloc_enchere div {
-  margin:0 10px;
-  width:100%;
-  text-align: center;
-  height:45px;
-  padding:13px;
-  background-color: var(--first-color);
-  color: var(--text-color);
-  border-radius: 10px;
-  font: 12px var(--font-title);
-  font-weight: 700;
-}
-.bloc_enchere img {
-  width:150px;
-  height:150px;
-  object-fit:cover;
-  margin:10px auto;
-  border-radius:10px;
-}
-.bloc_enchere ul {
-list-style:none;
-width:100%;
-margin:10px 0;
-}
-.bloc_enchere li {
-  color:var(--text-color);
-  text-align:center;
-  margin:0 auto;
-}
-
   /* - MEDIA QUERIES - */
-
   @media only screen and (max-width : 320px) {
     header img {
       width: 100%;
@@ -464,7 +406,6 @@ margin:10px 0;
       letter-spacing:0;
       text-align:center;
     }
-
     .bloc_enchere {
       width:100%!important;
       margin:0 auto!important;
@@ -501,3 +442,84 @@ margin:10px 0;
     }
 
   }
+
+
+  /* ---------- LISTE DES ENCHERES ---------- */
+.recherche {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  height: 50px;
+  width: 97%;
+  margin: 0 auto 10px auto;
+  border-bottom: 5px var(--first-color) dotted;
+}
+.recherche > div {
+  font: 30px var(--font-title);
+}
+input[type="search"],
+select {
+  width: 100%;
+  padding: 12px 20px;
+  height: 40px !important;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+.label {
+  color:white;
+  width:100%;
+  padding:10px;
+}
+.filtres, .categories {
+  font:18px var(--font-title);
+  color:var(--bg-color);
+}
+option {
+  font: 12px var(--font-text);
+  letter-spacing:2px!important;
+}
+button {
+  height: 50px !important;
+  width:100%;
+  border-radius:10px;
+}
+.bloc_enchere {
+  width:47%;
+  background-color:var(--bg-color)!important;
+  margin:0 10px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  border-radius:10px;
+}
+.bloc_enchere div {
+  margin:0 10px;
+  width:100%;
+  text-align: center;
+  height:45px;
+  padding:13px;
+  background-color: var(--first-color);
+  color: var(--text-color);
+  border-radius: 10px;
+  font: 12px var(--font-title);
+  font-weight: 700;
+}
+.bloc_enchere img {
+  width:150px;
+  height:150px;
+  object-fit:cover;
+  margin:10px auto;
+  border-radius:10px;
+}
+.bloc_enchere ul {
+list-style:none;
+width:100%;
+margin:10px 0;
+}
+.bloc_enchere li {
+  color:var(--text-color);
+  text-align:center;
+  margin:0 auto;
+}
