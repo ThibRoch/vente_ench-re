@@ -42,10 +42,10 @@ public class ServletConnection extends HttpServlet {
 		
 		if(user!= null) {
 			request.getSession().setAttribute("userConnected", user);
-			response.sendRedirect("lister");
+			response.sendRedirect("Page_Accueil.jsp");
 			
 		}else {
-			response.sendRedirect("seConnecter");
+			response.sendRedirect("Identification");
 		}
 	}
 
