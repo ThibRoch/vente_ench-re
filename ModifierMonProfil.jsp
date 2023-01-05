@@ -18,7 +18,6 @@
 		<img src="https://zupimages.net/up/22/51/hf35.jpg" />
     <h1>Les objets sont nos amis !</h1>
 		<nav>
-			<form method="post">
 				<ul>
 					<li><a
 						href="<%=response.encodeURL(request.getContextPath() + "/ServletCreer")%>"
@@ -27,7 +26,6 @@
 						href="<%=response.encodeURL(request.getContextPath() + "/ServletConnection")%>"
 						id="connexion">Se connecter</a></li>
 				</ul>
-			</form>
 		</nav>
 	</header>
 	
