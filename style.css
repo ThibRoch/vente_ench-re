@@ -1,0 +1,503 @@
+/* - root : stocke automatiquement des données
+pour changer automatiquement dans le reste du code - */
+  
+  :root {
+    --bg-color: #111111; /* fond noir */
+    --text-color: #f4f4f4; /* blanc */
+    --first-color: #B4AC72; /* doré */
+    --second-color: #343434; /* noir plus foncé */
+    --third-color: #644040; /* doré */
+    --border-color:#cccccc; /* gris */
+    --rgba: rgba(255, 255, 255, 0.5);
+    --radius:10px;
+  
+    --font-title: "Playfair Display", serif;
+    --font-text: "Roboto Condensed", sans-serif;
+  }
+
+  /* ---------- CODAGE COMMUN A TOUTES LES PAGES ---------- */
+
+  /* - mise en page de l'image de fond - */
+  body {
+    margin: 0;
+    font-size: 12px;
+    font-family:var(--font-text);
+    background-color:var(--bg-color);
+  }
+  *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+  }
+  header img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+  }
+  h1 {
+    position:absolute;
+    top:25%;
+    left:1%;
+    border:2px var(--text-color) solid;
+    color:var(--text-color);
+    text-align:center;
+    text-transform:uppercase;
+    padding:30px 20px;
+    font:40px var(--font-title);
+  }
+  h2 {
+    margin: 0 auto 10px auto;
+    width:100%;
+    text-align: center;
+    background-color: var(--first-color);
+    color: var(--text-color);
+    height: 80px;
+    padding: 20px;
+    border-radius: 10px;
+    font: 30px var(--font-title);
+    font-weight: 700;
+  }
+  h3 {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--bg-color);
+    padding:20px 0 10px 0;
+    font: 15px var(--font-text);
+  }
+  hr {
+    border: 2px solid #fff;
+    width:100%;
+    margin:0 0 10px 0;
+  }
+  p {
+    font:15px var(--font-text);
+  }
+
+  /* - barre de navigation - */
+  nav {
+    overflow: hidden;
+    background-color: var(--first-color);
+    height:60px;
+    margin-top:-4px;
+  }
+  nav a {
+    float: right;
+    display: block;
+    color: var(--bg-color);
+    text-align: center;
+    padding: 10px 30px;
+    text-decoration: none;
+    font: 14px var(--font-title);
+    border-radius:10px;
+    margin:2px 10px 0 0;
+    background-color:var(--text-color);
+  }
+  nav ul {
+    list-style:none;
+  }
+  nav a:hover {
+    background-color: var(--rgba);
+    color: var(--bg-color);
+  }
+
+  /* - conteneur - */
+  form {
+    margin:10px auto;
+    width:80%;
+  }
+  .contain {
+    padding: 16px;
+    background-color:var(--text-color);
+    border: 10px solid #e1e1e1;
+    border-radius:var(--radius);
+    outline:2px white solid;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    
+  }
+  .contain b {
+    font:15px var(--font-title);
+    font-weight:500;
+  }
+  .contain p {
+    font:14px var(--font-text);
+    text-align:right;
+    margin:0 0 10px 0;
+    width:100%;
+  } 
+  .contain a {
+    color:var(--first-color);
+    text-decoration:none;
+  }
+
+    /* - PAGE CONNEXION A SON COMPTE - */
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px #ccc solid;
+      box-sizing: border-box;
+      border-radius:var(--radius);
+      font:12px var(--font-text);
+      letter-spacing:1px;
+    }
+    button {
+      background-color: var(--first-color);
+      color: white;
+      padding: 14px 20px;
+      margin: 10px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      border-radius:var(--radius);
+      font:15px var(--font-title);
+      font-weight:400;
+      letter-spacing:2px;
+}
+    button:hover {
+      opacity: 0.8;
+}
+    .inscrire {
+      width: 100%;
+      padding: 20px 15px;
+}
+    span.mdp {
+      float: right;
+      padding-top: 7px;
+      font:15px var(--font-text);
+}
+.mdp a {
+      text-decoration:none;
+      color:var(--first-color);
+}
+
+  /* - PAGE ACQUISITION & PAGE DÉTAILS VENTE - */
+  .enchere {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    width:100%;
+    height:auto;
+  }
+  .enchere img {
+    width:350px;
+    height:150px;
+    margin:0 auto;
+    object-fit:cover;
+    border-radius:10px;
+  }
+  .enchere div {
+    font:25px var(--font-title);
+    width:100%;
+    margin:10px auto;
+    text-align:center;
+  }
+  .enchere b {
+    font:15px var(--font-title);
+    margin:10px 0 5px 0;
+    width:100%;
+  }
+  .enchere p {
+    display:block;
+    font:12px var(--font-text);
+    text-align:justify!important;
+    margin:0;
+    width:100%;
+  }
+  .user-info {
+    width:100%;
+    margin:10px 0 0 0;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+  }
+  .user-info div {
+    width:100%;
+    font:13px var(--font-title);
+    margin:10px auto 0 auto;
+  }
+  .user-info span {
+    background-color:#fff;
+    font:14px var(--font-text);
+    border:1px #ccc solid;
+    width:100%;
+    padding:10px 0;
+    text-align:center;
+    float:right;
+    position:relative;
+    margin:5px 0 0 0;
+    border-radius:10px;
+  }
+  .user-info p {
+    border-bottom:1px var(--bg-color) solid;
+    font:14px var(--font-title);
+    padding:10px;
+    width:100%;
+  }
+  .retour {
+    background-color: var(--first-color);
+    color: var(--text-color);
+    padding: 14px 20px;
+    margin: 10px auto 0 auto;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius:var(--radius);
+    font:15px var(--font-title);
+    font-weight:400;
+    letter-spacing:2px;
+  }
+  .retour:hover {
+    opacity: 0.8;
+  }
+
+  /* - PAGE CRÉER UN COMPTE - */
+  .identifier {
+    text-align:center;
+    background-color:var(--text-color);
+    border-radius:var(--radius);
+    padding:10px;
+    margin-top:10px;
+    font:14px var(--font-text);
+  }
+  .identifier a {
+    color:var(--first-color);
+    text-decoration:none;
+  }
+  /* - PAGE MODIFIER PROFIL - */
+  .enregistrer, .supprimer {
+    background-color: var(--first-color);
+    color: var(--text-color);
+    padding: 14px 20px;
+    margin: 0 auto;
+    border: none;
+    cursor: pointer;
+    width:100%;
+    border-radius:var(--radius);
+    font:15px var(--font-title);
+    font-weight:400;
+    letter-spacing:2px;
+  }
+  .supprimer {
+    margin:10px 0 -10px 0;
+    background-color:var(--third-color)!important;
+  }
+  .enregistrer:hover, .supprimer:hover {
+    opacity: 0.8;
+  }
+
+  /* - LISTE DES ENCHERES - */
+
+.recherche {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  height: 50px;
+  width: 97%;
+  margin: 0 auto 10px auto;
+  border-bottom: 5px var(--first-color) dotted;
+}
+.recherche > div {
+  font: 30px var(--font-title);
+}
+input[type="search"],
+select {
+  width: 100%;
+  padding: 12px 20px;
+  height: 40px !important;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+.label {
+  color:white;
+  width:100%;
+  padding:10px;
+}
+.filtres, .categories {
+  font:18px var(--font-title);
+  color:var(--bg-color);
+}
+option {
+  font: 12px var(--font-text);
+  letter-spacing:2px!important;
+}
+button {
+  height: 50px !important;
+  width:100%;
+  border-radius:10px;
+}
+.bloc_enchere {
+  width:47%;
+  background-color:var(--bg-color)!important;
+  margin:0 10px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  border-radius:10px;
+}
+.bloc_enchere div {
+  margin:0 10px;
+  width:100%;
+  text-align: center;
+  height:45px;
+  padding:13px;
+  background-color: var(--first-color);
+  color: var(--text-color);
+  border-radius: 10px;
+  font: 12px var(--font-title);
+  font-weight: 700;
+}
+.bloc_enchere img {
+  width:150px;
+  height:150px;
+  object-fit:cover;
+  margin:10px auto;
+  border-radius:10px;
+}
+.bloc_enchere ul {
+list-style:none;
+width:100%;
+margin:10px 0;
+}
+.bloc_enchere li {
+  color:var(--text-color);
+  text-align:center;
+  margin:0 auto;
+}
+
+  /* - MEDIA QUERIES - */
+
+  @media only screen and (max-width : 320px) {
+    header img {
+      width: 100%;
+      height: 200px!important;
+      object-fit: cover;
+    }
+    h1 {
+      position:absolute;
+      top:40%;
+      left:10%;
+      border:1px var(--text-color) solid;
+      color:var(--text-color);
+      width:80%;
+      text-align:center;
+      text-transform:uppercase;
+      padding:13px 0;
+      font:15px var(--font-title);
+    }
+    h2 {
+      margin: 0 auto 10px auto;
+      width:100%;
+      text-align: center;
+      height:65px;
+      padding:16px;
+      background-color: var(--first-color);
+      color: var(--text-color);
+      border-radius: 10px;
+      font: 12px var(--font-title);
+      font-weight: 700;
+    }
+    h3 {
+      width: 100%;
+      margin: -5px auto 0 auto;
+      text-align: center;
+      color: var(--bg-color);
+      padding:10px 0;
+      font: 12px var(--font-text);
+    }
+    nav {
+      height:auto;
+    }
+    nav a {
+      width:100%;
+      display: block;
+      color: var(--bg-color);
+      text-align: center;
+      padding: 10px 30px;
+      text-decoration: none;
+      font: 10px var(--font-title);
+      border-radius:10px;
+      margin:0 auto 5px auto;
+      background-color:var(--text-color);
+    }
+    .contain b {
+      font:10px var(--font-title);
+      font-weight:500;
+    }
+    .contain p {
+      font:10px var(--font-text);
+      text-align:center;
+      width:100%;
+    } 
+    .enchere div {
+      font:15px var(--font-title);
+    }
+    .enchere b {
+      font:12px var(--font-title);
+    }
+    .enchere p {
+      font:10px var(--font-text);
+    }
+    .enchere img {
+      width:200px;
+      height:150px;
+      margin:0 auto;
+      object-fit:cover;
+      border-radius:10px;
+      overflow:hidden;
+    }
+    input[type="text"],
+    input[type="password"] {
+      font:8px var(--font-text);
+    }
+    .identifier, .identifier a, .identifier p {
+      font-size:10px;
+    }
+    .enregistrer, .supprimer {
+      font-size:11px;
+      letter-spacing:0;
+      text-align:center;
+    }
+
+    .bloc_enchere {
+      width:100%!important;
+      margin:0 auto!important;
+      border-radius:10px;
+    }
+    .bloc_enchere div {
+      margin:0 10px;
+      width:100%;
+      text-align: center;
+      height:45px;
+      padding:13px;
+      background-color: var(--first-color);
+      color: var(--text-color);
+      border-radius: 10px;
+      font: 12px var(--font-title);
+      font-weight: 700;
+    }
+    .bloc_enchere img {
+      width:150px;
+      height:150px;
+      object-fit:cover;
+      margin:10px auto;
+      border-radius:10px;
+    }
+    .bloc_enchere ul {
+    list-style:none;
+    width:100%;
+    margin:10px 0;
+    }
+    .bloc_enchere li {
+      color:var(--text-color);
+      text-align:center;
+      margin:0 auto;
+    }
+
+  }
