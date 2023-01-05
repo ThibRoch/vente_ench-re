@@ -1,32 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="page_d'inscription_css.css">
-<title>Les objets sont nos amis</title>
-</head>
+    <!DOCTYPE html>
+    <html lang="fr">
+      <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Les objets sont nos amis</title>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+      </head>
 <body>
 
 	<header>
 		<img src="https://zupimages.net/up/22/51/hf35.jpg" />
+    <h1>Les objets sont nos amis !</h1>
 		<nav>
-			<div>Les objets sont nos amis !</div>
-
-			<ul>
-				<li><a href="${pageContext.request.contextPath}/ServletCreer" id="inscription">S'inscrire</a></li>
-				<li><a href="${pageContext.request.contextPath}/ServletConnection" id="connexion">Se connecter</a></li>
-			</ul>
+			<form method="post">
+				<ul>
+					<li><a
+						href="<%=response.encodeURL(request.getContextPath() + "/ServletCreer")%>"
+						id="inscription">S'inscrire</a></li>
+					<li><a
+						href="<%=response.encodeURL(request.getContextPath() + "/ServletConnection")%>"
+						id="connexion">Se connecter</a></li>
+				</ul>
+			</form>
 		</nav>
 	</header>
 
+	<section>
+		<article>
 	  <form method = post action ="ServletCreer">
 		<div class="contain">
-			<h1>Créer un compte</h1>
-			<h2>Merci de remplir tous les champs pour finaliser la création
-				de votre compte.</h2>
+			<h2>Créer un compte</h2>
+			<h3>Merci de remplir tous les champs pour finaliser la création
+				de votre compte.</h3>
 			<hr>
 
 			<label for="pseudo"><b>Pseudo</b></label> <input type="text"
@@ -79,6 +89,7 @@
 			</p>
 		</div>
 		</form>
-	
+	</article>
+</section>
 </body>
 </html>
