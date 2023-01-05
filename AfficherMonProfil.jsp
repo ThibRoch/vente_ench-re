@@ -18,7 +18,6 @@
 		<img src="https://zupimages.net/up/22/51/hf35.jpg" />
     <h1>Les objets sont nos amis !</h1>
 		<nav>
-			<form method="post">
 				<ul>
 					<li><a
 						href="<%=response.encodeURL(request.getContextPath() + "/ServletCreer")%>"
@@ -27,7 +26,6 @@
 						href="<%=response.encodeURL(request.getContextPath() + "/ServletConnection")%>"
 						id="connexion">Se connecter</a></li>
 				</ul>
-			</form>
 		</nav>
 	</header>
 
@@ -35,7 +33,7 @@
     <section>
       <form>
       <div class="contain">
-        <h2>Profil de ${Utilisateur.pseudo}</h2>
+        <h2>Mon profil</h2>
         <form method="post">
           <div class="user-info">
             			<label for="pseudo"><b>Pseudo</b></label> <input type="text"
@@ -63,6 +61,7 @@
 				<input type="text"  name="ville"
 				id="ville" value = "${Utilisateur.ville}"> 
           </div>
+          <button type="submit" class="modification">Modifier son profil</button>
         </form>
       </div>
     </form>
