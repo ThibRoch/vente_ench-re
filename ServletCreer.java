@@ -60,7 +60,10 @@ public class ServletCreer extends HttpServlet {
 		UtilisateurDAO.create(u);
 		
 		noUtilisateur++;
-		getServletContext().getRequestDispatcher("/Servlet_Afficher_Profil").include(request, response);
+		
+		// Renvoi vers une autre servlet pour afficher les infos
+		RequestDispatcher dispat = request.getRequestDispatcher("Servlet_Afficher_Profil.jsp");
+		dispat.forward(request,response);
 		
 	}
 
